@@ -1,0 +1,11 @@
+.root{
+    -fx-background-color:orange;
+}
+
+.button{
+    -fx-background-color:yellow;
+}
+
+.botao-limpar{
+    -fx-background-color:red;
+}

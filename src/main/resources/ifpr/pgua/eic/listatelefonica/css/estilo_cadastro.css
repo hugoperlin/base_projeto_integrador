@@ -1,0 +1,29 @@
+*{
+    -fx-cor-base:green;
+}
+
+.root{
+    -fx-background-color:radial-gradient(radius 100%, red, darkgray, black)
+
+}
+
+.text-field{
+    -fx-background-radius:20;
+}
+
+.button{
+    -fx-background-radius:20;
+    -fx-background-color:black;
+    -fx-text-fill: white;
+
+}
+
+#tfNome{
+    -fx-text-fill:pink;
+}
+
+.erro-textfield{
+    -fx-background-color:rgb(231, 149, 149);
+    -fx-border-color:red;
+    -fx-border-radius:20;
+}

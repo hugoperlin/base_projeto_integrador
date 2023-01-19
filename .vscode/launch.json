@@ -1,0 +1,29 @@
+{
+    // Use o IntelliSense para saber mais sobre os atributos possíveis.
+    // Focalizar para exibir as descrições dos atributos existentes.
+    // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Teste",
+            "request": "launch",
+            "mainClass": "ifpr.pgua.eic.listatelefonica.Teste",
+            "projectName": "listatelefonica"
+        },
+        {
+            "type": "java",
+            "name": "Launch DataBaseCreator",
+            "request": "launch",
+            "mainClass": "ifpr.pgua.eic.listatelefonica.DataBaseCreator",
+            "projectName": "listatelefonica"
+        },
+        {
+            "type": "java",
+            "name": "Launch Laucher",
+            "request": "launch",
+            "mainClass": "ifpr.pgua.eic.listatelefonica.Laucher",
+            "projectName": "listatelefonica"
+        }
+    ]
+}
