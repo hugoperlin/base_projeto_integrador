@@ -3,8 +3,8 @@ package ifpr.pgua.eic.listatelefonica.models.daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,69 +12,66 @@ import ifpr.pgua.eic.listatelefonica.models.Contato;
 import ifpr.pgua.eic.listatelefonica.models.FabricaConexoes;
 import ifpr.pgua.eic.listatelefonica.models.results.Result;
 
-public class JDBCContatoDAO implements ContatoDAO {
-
-    private FabricaConexoes fabricaConexao;
-
-    public JDBCContatoDAO(FabricaConexoes fabricaConexao) {
-        this.fabricaConexao = fabricaConexao;
-    }
-
-    @Override
-    public Result inserir(Contato contato) {
-        
-        try{
-            Connection con = fabricaConexao.getConnection();
-
-            PreparedStatement pstm = con.prepareStatement("INSERT INTO contatos(nome,email,telefone) VALUES (?,?,?)");
-
-            pstm.setString(1, contato.getNome());
-            pstm.setString(2, contato.getEmail());
-            pstm.setString(3, contato.getTelefone());
-
-            pstm.executeUpdate();
-
-            pstm.close();
-            con.close();
-
-            return Result.success("Contato cadastrado!");
-            
-
-        }catch(SQLException e){
-            return Result.fail(e.getMessage());
-        }
+public class JDBCContatoDAO implements ContatoDAO{
+    private FabricaConexoes fabricaConexoes;
+    
+    public JDBCContatoDAO(FabricaConexoes fabricaConexoes){
+        this.fabricaConexoes = fabricaConexoes;
     }
 
     @Override
     public List<Contato> buscarTodos() {
-        try{
-            Connection con = fabricaConexao.getConnection();
-
-            PreparedStatement pstm = con.prepareStatement("SELECT * FROM contatos");
-
-            ResultSet resultSet = pstm.executeQuery();
-
+         try {
+            Connection con = fabricaConexoes.getConnection();
+            
+            PreparedStatement prep = con.prepareStatement("SELECT * FROM contatos");
+            
+            ResultSet result = prep.executeQuery();
+            
             ArrayList<Contato> contatos = new ArrayList<>();
-
-            while(resultSet.next()){
-                Integer id = resultSet.getInt("id");
-                String nome = resultSet.getString("nome");
-                String email = resultSet.getString("email");
-                String telefone = resultSet.getString("telefone");
-
+            
+            while(result.next()){
+                Integer id = result.getInt("id");
+                String nome = result.getString("nome");
+                String email = result.getString("email");
+                String telefone = result.getString("telefone");
+                
                 Contato contato = new Contato(id, nome, email, telefone);
-
+                
                 contatos.add(contato);
             }
             
-            resultSet.close();
-            pstm.close();
+            result.close();
+            prep.close();
             con.close();
+            
             return contatos;
-
-        }catch(SQLException e ){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public Result inserir(Contato contato) {
+        try {
+            Connection con = fabricaConexoes.getConnection();
+            
+            PreparedStatement prep = con
+                    .prepareStatement("INSERT INTO contatos (nome,email,telefone) VALUES (?,?,?)");
+            
+            prep.setString(1, contato.getNome());
+            prep.setString(2, contato.getEmail());
+            prep.setString(3, contato.getTelefone());
+            
+            prep.executeUpdate();
+            
+            prep.close();
+            con.close();
+            
+            return Result.success("Tudo certo!!!! TOme!!");
+        } catch (Exception e) {
+            return Result.fail(e.getMessage());
         }
     }
     

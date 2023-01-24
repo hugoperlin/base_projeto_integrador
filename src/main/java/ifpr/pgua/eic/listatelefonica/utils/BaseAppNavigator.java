@@ -1,19 +1,17 @@
 package ifpr.pgua.eic.listatelefonica.utils;
 
 
-import java.io.IOException;
-import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 /**
  * Classe responsável por criar uma aplicação que permite a 
@@ -28,33 +26,23 @@ import javafx.util.Callback;
 
 public abstract class BaseAppNavigator extends Application{
 
-
-
-
     private static StackPane root;
     private static Scene cena;
     private Stage palco;
+    private static Map<String,ScreenRegistry> registroTelas = new HashMap<>();
 
     @Override
     public final void start(Stage primaryStage) throws Exception {
 
+        registrarTelas();
+
         root = new StackPane();
-<<<<<<< HEAD
         
         String homeRegistry = getHome();
-=======
-
-        ScreenRegistry homeRegistry = getHomeFXML();
->>>>>>> parent of 8692235 (corrigindo utils)
         if(homeRegistry != null){
             pushScreen(homeRegistry);
         }else{
-            Parent home = getHomeParent();
-            if(home != null){
-                pushScreen(home);
-            }else{
-                throw new RuntimeException("Um dos métodos getHome deve retornar algo diferente de null!");
-            }
+            throw new RuntimeException("Um dos métodos getHome deve retornar algo diferente de null!");
         }
 
         cena = new Scene(root,Region.USE_PREF_SIZE,Region.USE_PREF_SIZE);
@@ -76,33 +64,17 @@ public abstract class BaseAppNavigator extends Application{
      * e seu controlador.
      */
 
-    public final static void pushScreen(ScreenRegistry screen){
+    public final static void pushScreen(String nomeTela){
+        ScreenRegistry screen = pegaTela(nomeTela);
         if(root.getChildren().size() > 0){
             root.getChildren().get(root.getChildren().size()-1).setVisible(false);
         }
 
-        Parent tela = loadFxml(screen.getFxmlResource(),screen.getControler());
+        Parent tela = screen.getRoot();
         root.getChildren().add(tela);
     }
 
-    /**
-     * Método responsável por trocar todo o conteúdo da janela por uma
-     * nova cena. A nova cena será empilhada sobre a cena anterior,
-     * e a cena anterior ficará invisível. Pode ser utilizado como o popScreen. 
-     * 
-     * @param screen Objeto do tipo Parent que indica qual a classe que representa a tela.
-     * 
-     */
-
-    public final static void pushScreen(Parent screen){
-        if(root.getChildren().size() > 0){
-            root.getChildren().get(root.getChildren().size()-1).setVisible(false);
-        }
-
-        root.getChildren().add(screen);
-    }
-
-
+    
         
     /***
      * Método responsável por desempilhar a tela que está no topo e mostrar
@@ -127,10 +99,11 @@ public abstract class BaseAppNavigator extends Application{
      * @param regiao localização onde a parte será inserida.
      */
 
-    public final static void changeScreenRegion(ScreenRegistry screenPiece, BorderPaneRegion regiao){
+    public final static void changeScreenRegion(String nomeTela, BorderPaneRegion regiao){
         try{
+            ScreenRegistry screenPiece = pegaTela(nomeTela);
             BorderPane borderPane = (BorderPane) root.getChildren().get(root.getChildren().size()-1);
-            Parent root = loadFxml(screenPiece.getFxmlResource(), screenPiece.getControler());
+            Parent root = screenPiece.getRoot();
             
             switch(regiao){
                 case LEFT: 
@@ -157,30 +130,6 @@ public abstract class BaseAppNavigator extends Application{
         }
     }
 
-    /**
-     * Método que permite carregar um fxml.
-     * 
-     * @param fxml Localização do arquivo fxml. Geralmente está dentro da pasta resources do projeto.
-     * @param controlerMaker Função anônima para criar um controlador da janela.
-     * @return
-     */
-    private static Parent loadFxml(URL fxml, Callback controlerMaker){
-        try{
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(fxml);
-            loader.setControllerFactory(controlerMaker);
-
-            Parent root = loader.load();
-
-            return root;
-        }catch(IOException e){
-            System.out.println("PROBLEMA AO CARREGAR O FXML!!! O arquivo "+fxml+" existe?");
-            e.printStackTrace();
-            Platform.exit();
-        }
-        return null;
-    }
-
 
 
     /**
@@ -188,16 +137,7 @@ public abstract class BaseAppNavigator extends Application{
      * 
      * @return o ScreenRegistry da tela inicial.
      */
-    public abstract ScreenRegistry getHomeFXML();
-
-    /**
-     * Método responsável por indicar quel é a tela inicial da aplicação, 
-     * utilizando uma classe
-     * 
-     * @return o Parent da tela inicial.
-     */
-    
-    public abstract Parent getHomeParent();
+    public abstract String getHome();
 
     /**
      * Método que retorna o título da aplicação.
@@ -206,7 +146,6 @@ public abstract class BaseAppNavigator extends Application{
      */
     public abstract String getAppTitle();
 
-<<<<<<< HEAD
     public void registraTela(String nome, ScreenRegistry tela){
         if(nome.isBlank() || nome.isEmpty() || nome == null){
             throw new RuntimeException("[REGISTRA TELA] Nome inválido!");
@@ -241,7 +180,5 @@ public abstract class BaseAppNavigator extends Application{
     
 
     public abstract void registrarTelas();
-=======
->>>>>>> parent of 8692235 (corrigindo utils)
 
 }
