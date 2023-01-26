@@ -4,7 +4,7 @@
     // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
+
 
 
 
@@ -13,7 +13,7 @@
             "name": "Launch Laucher",
             "request": "launch",
             "mainClass": "ifpr.pgua.eic.setgo.Laucher",
-            "projectName": "listatelefonica"
+            "projectName": "setgo"
         },
         {
             "type": "java",
