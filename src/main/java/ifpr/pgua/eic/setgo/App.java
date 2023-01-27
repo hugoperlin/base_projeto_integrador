@@ -11,6 +11,8 @@ import java.io.IOException;
 import ifpr.pgua.eic.setgo.controllers.JanelaCadastro;
 import ifpr.pgua.eic.setgo.controllers.JanelaLista;
 import ifpr.pgua.eic.setgo.controllers.JanelaPrincipal;
+import ifpr.pgua.eic.setgo.controllers.JanelaProduto;
+import ifpr.pgua.eic.setgo.models.Estoque;
 import ifpr.pgua.eic.setgo.models.ListaTelefonica;
 import ifpr.pgua.eic.setgo.utils.BaseAppNavigator;
 import ifpr.pgua.eic.setgo.utils.ScreenRegistry;
@@ -22,6 +24,7 @@ import ifpr.pgua.eic.setgo.utils.ScreenRegistryFXML;
 public class App extends BaseAppNavigator {
 
     private ListaTelefonica listaTelefonica;
+    private Estoque estoque;
 
     @Override
     public void init() throws Exception {
@@ -29,6 +32,7 @@ public class App extends BaseAppNavigator {
         super.init();
 
         listaTelefonica = new ListaTelefonica();
+        estoque = new Estoque();
     }
 
     @Override
@@ -46,6 +50,7 @@ public class App extends BaseAppNavigator {
         registraTela("PRINCIPAL", new ScreenRegistryFXML(App.class, "fxml/principal.fxml", o->new JanelaPrincipal()));
         registraTela("CADASTRO", new ScreenRegistryFXML(App.class, "fxml/cadastro.fxml", o->new JanelaCadastro(listaTelefonica)));
         registraTela("LISTA", new ScreenRegistryFXML(App.class, "fxml/listar.fxml", o->new JanelaLista(listaTelefonica)));
+        registraTela("PRODUTOS", new ScreenRegistryFXML(App.class, "fxml/produtos.fxml", o->new JanelaProduto(estoque)));
         
     }
 

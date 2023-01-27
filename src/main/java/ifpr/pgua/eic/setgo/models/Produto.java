@@ -19,6 +19,16 @@ public class Produto {
         this.precoProduto = preco;
     }
     
+    public Produto(String nome, String descricao, float preco){
+        this.nomeProduto = nome;
+        this.descricao = descricao;
+        this.precoProduto = preco;
+    }
+
+    public int getId(){
+        return this.idProduto;
+    }
+    
     public String getNome(){
         return this.nomeProduto;
     }

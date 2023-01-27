@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="CENTER" 
+          hgap="5.0" 
+          prefHeight="400" 
+          prefWidth="600" 
+          vgap="5.0" 
+          xmlns="http://javafx.com/javafx/18" 
+          xmlns:fx="http://javafx.com/fxml/1" 
+          fx:controller="ifpr.pgua.eic.setgo.controllers.JanelaProduto"
+          stylesheets="@../css/estilo.css;@../css/estilo_cadastro.css"
+          
+          >
+
+    <Label  text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <TextField  fx:id="tfNome"  GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+    <Label text="Descrição:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <TextField fx:id="tfDescri" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+    <Label text="Preço:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <TextField fx:id="tfPreco" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+    <HBox GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <Button onAction="#cadastrar" text="Cadastrar" />
+         <Button text="Limpar" styleClass="botao-limpar"/>
+      </HBox>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+
+</GridPane>

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import ifpr.pgua.eic.setgo.models.Contato;
 import ifpr.pgua.eic.setgo.models.FabricaConexoes;
 import ifpr.pgua.eic.setgo.models.Produto;
 import ifpr.pgua.eic.setgo.models.results.Result;

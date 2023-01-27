@@ -26,6 +26,7 @@
       
          <Button text="Cadastrar" prefWidth="150" onAction="#carregaTelaCadastro"/>
          <Button text="Listar" prefWidth="150" onAction="#carregaTelaLista"/>
+         <Button text="Produtos" prefWidth="150" onAction="#carregaTelaProdutos"/>
       </VBox>
    </left>
 

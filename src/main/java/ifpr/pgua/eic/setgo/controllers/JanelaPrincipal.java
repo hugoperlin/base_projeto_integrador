@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 
 public class JanelaPrincipal {
 
-
     @FXML
     private void carregaTelaCadastro(){
         App.changeScreenRegion("CADASTRO", BorderPaneRegion.CENTER);
@@ -17,5 +16,9 @@ public class JanelaPrincipal {
         App.changeScreenRegion("LISTA", BorderPaneRegion.CENTER);
     }
 
+    @FXML
+    private void carregaTelaProdutos(){
+        App.changeScreenRegion("PRODUTOS", BorderPaneRegion.CENTER);
+    }
     
 }
