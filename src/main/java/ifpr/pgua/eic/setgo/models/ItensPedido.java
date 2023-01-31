@@ -1,25 +1,14 @@
 package ifpr.pgua.eic.setgo.models;
 
 public class ItensPedido {
-    private int idItensPedido;
+    private Produto produto;
     private int quantidade;       
     private float preco;
-    //private status;
-    private Produto produto;
     
-    public ItensPedido(int idItensPedido, int quantidade, float preco, Produto produto) {
-        this.idItensPedido = idItensPedido;
-        this.quantidade = quantidade;
-        this.preco = preco;
+    public ItensPedido(Produto produto, int quantidade, float preco) {       
         this.produto = produto;
-    }
-
-    public int getIdItensPedido() {
-        return idItensPedido;
-    }
-
-    public void setIdItensPedido(int idItensPedido) {
-        this.idItensPedido = idItensPedido;
+        this.quantidade = quantidade;
+        this.preco = produto.getPreco()*quantidade;
     }
 
     public int getQuantidade() {
@@ -48,10 +37,8 @@ public class ItensPedido {
 
     @Override
     public String toString(){
-        return "Produto: " +produto.getDescricao()+ "Valor: " +preco+ "Quantidade" +quantidade;
+        return "Produto: " +produto.getDescricao()+ "Quantidade" +quantidade+ "Preço: " +preco;
     }
-    
-
     
 }
 
