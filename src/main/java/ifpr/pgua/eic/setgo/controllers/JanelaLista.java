@@ -33,10 +33,7 @@ public class JanelaLista implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         System.out.println(listaTelefonica.getContatos());
         ltvContatos.getItems().addAll(listaTelefonica.getContatos());
-        
     }
-
-
 
     @FXML
     private void mostraDetalhes(MouseEvent evento){

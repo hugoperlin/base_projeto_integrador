@@ -1,11 +1,17 @@
 .root{
-    -fx-background-color:orange;
+    -fx-background-color:#AAA;
 }
 
 .button{
-    -fx-background-color:yellow;
+    -fx-background-color: #FFF;
 }
 
 .botao-limpar{
-    -fx-background-color:red;
+    -fx-background-color: #FF6666;
+    -fx-text-fill: #FFF;
+}
+
+.botao-suc{
+    -fx-background-color: #6676FF;
+    -fx-text-fill: #FFF;
 }

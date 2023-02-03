@@ -9,20 +9,6 @@
             "name": "Launch Laucher",
             "request": "launch",
             "mainClass": "ifpr.pgua.eic.setgo.Laucher",
-            "projectName": "vendinha2022"
-        },
-        {
-            "type": "java",
-            "name": "Launch Laucher",
-            "request": "launch",
-            "mainClass": "ifpr.pgua.eic.setgo.Laucher",
-            "projectName": "setgo"
-        },
-        {
-            "type": "java",
-            "name": "Launch Laucher",
-            "request": "launch",
-            "mainClass": "ifpr.pgua.eic.setgo.Laucher",
             "projectName": "setgo"
         },
         {
@@ -37,13 +23,6 @@
             "name": "Launch DataBaseCreator",
             "request": "launch",
             "mainClass": "ifpr.pgua.eic.setgo.DataBaseCreator",
-            "projectName": "setgo"
-        },
-        {
-            "type": "java",
-            "name": "Launch Laucher",
-            "request": "launch",
-            "mainClass": "ifpr.pgua.eic.setgo.Laucher",
             "projectName": "setgo"
         }
     ]

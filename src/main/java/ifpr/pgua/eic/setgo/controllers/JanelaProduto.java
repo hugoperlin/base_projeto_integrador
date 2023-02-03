@@ -4,10 +4,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import ifpr.pgua.eic.setgo.models.Estoque;
+import ifpr.pgua.eic.setgo.models.Produto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
@@ -21,7 +25,21 @@ public class JanelaProduto implements Initializable {
 
     @FXML
     private TextField tfPreco;
+    
+    @FXML
+    private ListView<Produto> ltvProdutos;
 
+    @FXML
+    private TableView<Produto> tblProdutos;
+    
+    @FXML 
+    private TableColumn<Produto, String> idProduto; 
+
+    @FXML 
+    private TableColumn<Produto, String> nomeProduto; 
+
+    @FXML 
+    private TableColumn<Produto, String> precoProduto; 
 
     private Estoque estoque;
 
@@ -31,7 +49,8 @@ public class JanelaProduto implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        
+        ltvProdutos.getItems().addAll(estoque.getProdutos());
+        tblProdutos.getItems().addAll(estoque.getProdutos());
     }
 
     @FXML
@@ -41,7 +60,7 @@ public class JanelaProduto implements Initializable {
         String preco = tfPreco.getText();
         float precoParse = Float.parseFloat(preco);
 
-        String msg = "Cadstro realizado!";
+        String msg = "Cadastro realizado!";
         if(!estoque.adicionarProduto(nome, descricao, precoParse)){
             msg = "Cadastro não realizado!";
         }else{
@@ -50,8 +69,10 @@ public class JanelaProduto implements Initializable {
 
         Alert alert = new Alert(AlertType.INFORMATION,msg);
         alert.showAndWait();
-
-
+        ltvProdutos.getItems().clear();
+        ltvProdutos.getItems().addAll(estoque.getProdutos());
+        tblProdutos.getItems().clear();
+        tblProdutos.getItems().addAll(estoque.getProdutos());
     }
 
     private void limpar(){
@@ -59,7 +80,6 @@ public class JanelaProduto implements Initializable {
         tfDescri.clear();
         tfPreco.clear();
     }
-
 
 }
 

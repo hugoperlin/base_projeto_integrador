@@ -3,9 +3,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
 <GridPane alignment="CENTER" 
@@ -29,10 +33,10 @@
     <Label text="Preço:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
     <TextField fx:id="tfPreco" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-    <HBox GridPane.columnIndex="1" GridPane.rowIndex="3">
-        <Button onAction="#cadastrar" text="Cadastrar" />
-         <Button text="Limpar" styleClass="botao-limpar"/>
-      </HBox>
+   <HBox GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <Button onAction="#cadastrar" text="Cadastrar" styleClass="botao-suc" />
+      <Button text="Limpar" styleClass="botao-limpar"/>
+   </HBox>
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
@@ -43,5 +47,16 @@
       <RowConstraints />
       <RowConstraints />
    </rowConstraints>
+   <Label text="Produtos" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+   <ListView fx:id="ltvProdutos" GridPane.columnIndex="0" 
+         GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+   <TableView fx:id="tblProdutos" GridPane.columnIndex="0" 
+         GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.columnSpan="2">
+      <columns>
+         <TableColumn prefWidth="75.0" text="Id" fx:id="idProduto" />
+         <TableColumn prefWidth="75.0" text="Produto" fx:id="nomeProduto" />
+         <TableColumn prefWidth="75.0" text="Preço" fx:id="precoProduto" />
+      </columns>
+   </TableView>
 
 </GridPane>
