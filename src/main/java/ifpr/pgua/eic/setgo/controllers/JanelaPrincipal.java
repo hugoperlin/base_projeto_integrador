@@ -26,5 +26,4 @@ public class JanelaPrincipal {
         App.changeScreenRegion("PEDIDOS", BorderPaneRegion.CENTER);
     }
     
-    
 }

@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import ifpr.pgua.eic.setgo.controllers.JanelaCadastro;
 import ifpr.pgua.eic.setgo.controllers.JanelaLista;
+import ifpr.pgua.eic.setgo.controllers.JanelaPedido;
 import ifpr.pgua.eic.setgo.controllers.JanelaPrincipal;
 import ifpr.pgua.eic.setgo.controllers.JanelaProduto;
 import ifpr.pgua.eic.setgo.models.Estoque;
@@ -51,6 +52,7 @@ public class App extends BaseAppNavigator {
         registraTela("CADASTRO", new ScreenRegistryFXML(App.class, "fxml/cadastro.fxml", o->new JanelaCadastro(listaTelefonica)));
         registraTela("LISTA", new ScreenRegistryFXML(App.class, "fxml/listar.fxml", o->new JanelaLista(listaTelefonica)));
         registraTela("PRODUTOS", new ScreenRegistryFXML(App.class, "fxml/produtos.fxml", o->new JanelaProduto(estoque)));
+        registraTela("PEDIDOS", new ScreenRegistryFXML(App.class, "fxml/pedidos.fxml", o->new JanelaPedido(estoque)));
         
     }
 

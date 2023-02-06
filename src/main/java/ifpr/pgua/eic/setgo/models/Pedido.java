@@ -1,15 +1,16 @@
 package ifpr.pgua.eic.setgo.models;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class Pedido {
     private int idPedido;
-    private Date data;      
+    private LocalDate data;      
     private float valorTotal;
     private List<ItensPedido> itens;
 
-    public Pedido(int idPedido, Date data, float valorTotal){
+    public Pedido(int idPedido, LocalDate data, float valorTotal){
         this.idPedido = idPedido;
         this.data = data;
         this.valorTotal = valorTotal;
@@ -27,11 +28,11 @@ public class Pedido {
         this.idPedido = idPedido;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

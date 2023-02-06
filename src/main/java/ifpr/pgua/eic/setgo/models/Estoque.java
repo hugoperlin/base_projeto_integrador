@@ -1,33 +1,34 @@
 package ifpr.pgua.eic.setgo.models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Estoque {
     
     private ArrayList<Produto> produtos;
+    private ArrayList<Pedido> pedidos;
 
     public Estoque(){
         produtos = new ArrayList<>();
+        pedidos = new ArrayList<>();
     }
 
-    /**
-     * Adiciona um novo contato na lista, caso não existe nenhum contato prévio com o
-     * mesmo e-mail.
-     *      
-     *  
-     * @param nome Nome do contato
-     * @param telefone Telefone do contato
-     * @param email Email do contato
-     * @return true se conseguiu adicionar, false caso contrário
-     */
     public boolean adicionarProduto(String nome, String descricao, float preco){
-        
-        
         if(buscar(nome) == null){
             Produto produto = new Produto(nome, descricao, preco);
             produtos.add(produto);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean adicionarPedido(int id, LocalDate data, float total){
+        if(buscarPedido(id) == null){
+            Pedido pedido = new Pedido(id, data, total);
+            pedidos.add(pedido);
             return true;
         }
         return false;
@@ -37,6 +38,10 @@ public class Estoque {
         return produtos.stream().filter((produto)->produto.getNome().equals(nome)).findFirst().orElse(null);
     }
 
+    public Pedido buscarPedido(int id){
+        return pedidos.stream().filter((pedido)->pedido.getIdPedido() == id).findFirst().orElse(null);
+    }
+
     /**
      * Acesso a lista de produtos;
      *  
@@ -44,6 +49,10 @@ public class Estoque {
      */
     public List<Produto> getProdutos(){
         return produtos;
+    }
+
+    public List<Pedido> getPedidos(){
+        return pedidos;
     }
 
     /**

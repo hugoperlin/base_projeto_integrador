@@ -4,6 +4,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import ifpr.pgua.eic.setgo.models.Estoque;
 import ifpr.pgua.eic.setgo.models.ItensPedido;
 import ifpr.pgua.eic.setgo.models.Pedido;
 import javafx.event.ActionEvent;
@@ -27,38 +28,40 @@ public class JanelaPedido implements Initializable {
     private TextField tfValorTotal;
 
     @FXML
-    private ListView<ItensPedido> ltvItens;
+    private ListView<Pedido> ltvPedidos;
 
-    private Pedido pedido;
+    private Estoque estoque;
 
-    public JanelaPedido(Pedido pedido){
-        this.pedido= pedido;
+    public JanelaPedido(Estoque estoque){
+        this.estoque= estoque;
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        
+        ltvPedidos.getItems().addAll(estoque.getPedidos());
     }
 
     @FXML
-    private void realizarPedido(ActionEvent evento){
+    private void registrarPedido(ActionEvent evento){
+        int idPedido = Integer.parseInt(tfIdPedido.getText());
         LocalDate data = tfData.getValue();
-        String valorTotal = tfValorTotal.getText();
-        float precoParse = Float.parseFloat(valorTotal);
+        float precoParse = Float.parseFloat(tfValorTotal.getText());
     
 
-        /*if(Pedido.adicionarPedido()){
+        if(estoque.adicionarPedido(idPedido, data, precoParse)){
             Alert alert = new Alert(AlertType.INFORMATION,"Pedido realizado");
                 alert.showAndWait();
                 limpar();
         }else{
                 Alert alert = new Alert(AlertType.INFORMATION,"Pedido Não Realizado");
                 alert.showAndWait();  
-        }*/
+        }
+        ltvPedidos.getItems().addAll(estoque.getPedidos());
     }
 
     private void limpar(){
-        tfData.setValue((LocalDate.now()));
+        tfIdPedido.clear();
+        tfData.setValue(null);;
         tfValorTotal.clear();
     }
 }
