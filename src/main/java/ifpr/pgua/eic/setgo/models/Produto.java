@@ -41,19 +41,20 @@ public class Produto {
         return this.precoProduto;
     }
     
-    public void inserirProduto(){
-        
+    public void setId(int id){
+        this.idProduto = id;
     }
-
-    public void alterarProduto(){
-        
+    
+    public void setNome(String nome){
+        this.nomeProduto = nome;
     }
-
-    public void removerProduto(){
-        
+    
+    public void setDescricao(String descricao){
+        this.descricao = descricao;
     }
-
-    public void consultarProduto(){
-        
+    
+    public void setPreco(float preco){
+        this.precoProduto = preco;
     }
+    
 }

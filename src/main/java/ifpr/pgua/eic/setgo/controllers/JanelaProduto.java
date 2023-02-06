@@ -3,8 +3,11 @@ package ifpr.pgua.eic.setgo.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import ifpr.pgua.eic.setgo.controllers.ViewModels.ProdutoRow;
 import ifpr.pgua.eic.setgo.models.Estoque;
 import ifpr.pgua.eic.setgo.models.Produto;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class JanelaProduto implements Initializable {
     
@@ -30,16 +34,16 @@ public class JanelaProduto implements Initializable {
     private ListView<Produto> ltvProdutos;
 
     @FXML
-    private TableView<Produto> tblProdutos;
+    private final TableView<ProdutoRow> tblProdutos;
     
     @FXML 
-    private TableColumn<Produto, String> idProduto; 
+    private TableColumn<ProdutoRow, String> idProduto; 
 
     @FXML 
-    private TableColumn<Produto, String> nomeProduto; 
+    private TableColumn<ProdutoRow, String> nomeProduto; 
 
     @FXML 
-    private TableColumn<Produto, String> precoProduto; 
+    private TableColumn<ProdutoRow, String> precoProduto; 
 
     private Estoque estoque;
 
@@ -50,7 +54,7 @@ public class JanelaProduto implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         ltvProdutos.getItems().addAll(estoque.getProdutos());
-        tblProdutos.getItems().addAll(estoque.getProdutos());
+        listarProdutos();
     }
 
     @FXML
@@ -72,7 +76,17 @@ public class JanelaProduto implements Initializable {
         ltvProdutos.getItems().clear();
         ltvProdutos.getItems().addAll(estoque.getProdutos());
         tblProdutos.getItems().clear();
-        tblProdutos.getItems().addAll(estoque.getProdutos());
+        listarProdutos();
+    }
+    
+    public void listarProdutos(){
+        ObservableList<Produto> data = FXCollections
+                .observableArrayList(estoque.getProdutos());
+        idProduto.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
+        nomeProduto.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
+        precoProduto.setCellValueFactory(new PropertyValueFactory<>("precoProduto"));
+        tblProdutos.setItems(data);
+        tblProdutos.getColumns().addAll(idProduto, nomeProduto, precoProduto);
     }
 
     private void limpar(){

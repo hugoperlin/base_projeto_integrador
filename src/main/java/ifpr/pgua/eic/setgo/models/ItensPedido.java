@@ -5,7 +5,7 @@ public class ItensPedido {
     private int quantidade;       
     private float preco;
     
-    public ItensPedido(Produto produto, int quantidade, float preco) {       
+    public ItensPedido(Produto produto, int quantidade) {       
         this.produto = produto;
         this.quantidade = quantidade;
         this.preco = produto.getPreco()*quantidade;
