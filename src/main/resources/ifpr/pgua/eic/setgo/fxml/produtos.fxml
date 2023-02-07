@@ -34,7 +34,8 @@
     <TextField fx:id="tfPreco" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
    <HBox GridPane.columnIndex="1" GridPane.rowIndex="3">
-      <Button onAction="#cadastrar" text="Cadastrar" styleClass="botao-suc" />
+      <Button onAction="#cadastrar" fx:id="btCadastrar"
+            text="Cadastrar" styleClass="botao-suc" />
       <Button text="Limpar" styleClass="botao-limpar"/>
    </HBox>
    <columnConstraints>

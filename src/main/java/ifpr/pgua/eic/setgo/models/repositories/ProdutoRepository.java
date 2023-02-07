@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import ifpr.pgua.eic.setgo.models.Produto;
 import ifpr.pgua.eic.setgo.models.daos.ProdutoDAO;
+import ifpr.pgua.eic.setgo.models.entities.Produto;
 import ifpr.pgua.eic.setgo.models.results.Result;
 
 public class ProdutoRepository {
@@ -32,7 +32,7 @@ public class ProdutoRepository {
             
     }
 
-    public Result atualizarCliente(int id, String nome, String descricaoNova, 
+    public Result atualizarProduto(int id, String nome, String descricaoNova, 
             float precoNovo){
         Optional<Produto> busca = produtos.stream()
                 .filter((p)->p.getId() == id)
@@ -43,7 +43,7 @@ public class ProdutoRepository {
             produto.setDescricao(descricaoNova);
             produto.setPreco(precoNovo);
 
-            return Result.success("Cliente atualizado com sucesso!");
+            return Result.success("Produto atualizado com sucesso!");
         }
         return Result.fail("Cliente não encontrado!");
     }

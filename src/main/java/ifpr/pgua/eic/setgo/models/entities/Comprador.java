@@ -1,4 +1,4 @@
-package ifpr.pgua.eic.setgo.models;
+package ifpr.pgua.eic.setgo.models.entities;
 
 public class Comprador extends Usuario{
 

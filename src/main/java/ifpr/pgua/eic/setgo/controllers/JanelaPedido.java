@@ -4,9 +4,9 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-import ifpr.pgua.eic.setgo.models.Estoque;
-import ifpr.pgua.eic.setgo.models.ItensPedido;
-import ifpr.pgua.eic.setgo.models.Pedido;
+import ifpr.pgua.eic.setgo.models.entities.Estoque;
+import ifpr.pgua.eic.setgo.models.entities.ItensPedido;
+import ifpr.pgua.eic.setgo.models.entities.Pedido;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

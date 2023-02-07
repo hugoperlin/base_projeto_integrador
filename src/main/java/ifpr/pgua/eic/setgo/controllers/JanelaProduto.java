@@ -3,38 +3,28 @@ package ifpr.pgua.eic.setgo.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import ifpr.pgua.eic.setgo.controllers.ViewModels.JanelaProdutosViewModel;
 import ifpr.pgua.eic.setgo.controllers.ViewModels.ProdutoRow;
-import ifpr.pgua.eic.setgo.models.Estoque;
-import ifpr.pgua.eic.setgo.models.Produto;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import ifpr.pgua.eic.setgo.models.entities.Produto;
+import ifpr.pgua.eic.setgo.models.results.Result;
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 public class JanelaProduto implements Initializable {
-    
-    @FXML
-    private TextField tfNome;
-
-    @FXML
-    private TextField tfDescri;
-
-    @FXML
-    private TextField tfPreco;
     
     @FXML
     private ListView<Produto> ltvProdutos;
 
     @FXML
-    private final TableView<ProdutoRow> tblProdutos;
+    private TableView<ProdutoRow> tblProdutos;
     
     @FXML 
     private TableColumn<ProdutoRow, String> idProduto; 
@@ -43,56 +33,71 @@ public class JanelaProduto implements Initializable {
     private TableColumn<ProdutoRow, String> nomeProduto; 
 
     @FXML 
+    private TableColumn<ProdutoRow, String> descriProduto; 
+
+    @FXML 
     private TableColumn<ProdutoRow, String> precoProduto; 
+    
+    @FXML 
+    private Button btCadastrar;
 
-    private Estoque estoque;
+    private JanelaProdutosViewModel viewModel;
 
-    public JanelaProduto(Estoque estoque){
-        this.estoque = estoque;
+    public JanelaProduto(JanelaProdutosViewModel viewModel){
+        this.viewModel = viewModel;
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        ltvProdutos.getItems().addAll(estoque.getProdutos());
         listarProdutos();
+        viewModel.selecionadoProperty().bind(tblProdutos.getSelectionModel().selectedItemProperty());
+
+        viewModel.alertProperty().addListener((ChangeListener<Result>) (observable, oldVal, newVal) -> {
+            BaseController.showMessage(newVal);
+        });
+
+        //liga a propriedade texto do textfield nome com a propriedade do viewmodel
+        nomeProduto.textProperty().bindBidirectional(viewModel.nomeProperty());
+        //liga a propriedade editavel do textfield com a propriedade do viewmodel
+        nomeProduto.editableProperty().bind(viewModel.podeEditarProperty());
+        
+        
+        precoProduto.textProperty().bindBidirectional(viewModel.precoProperty());
+        precoProduto.editableProperty().bind(viewModel.podeEditarProperty());
+
+        descriProduto.textProperty().bindBidirectional(viewModel.descriProperty());
+        idProduto.textProperty().bindBidirectional(viewModel.idProperty());
+
+        btCadastrar.textProperty().bind(viewModel.operacaoProperty());
     }
 
     @FXML
     private void cadastrar(ActionEvent evento){
-        String nome = tfNome.getText();
-        String descricao = tfDescri.getText();
-        String preco = tfPreco.getText();
-        float precoParse = Float.parseFloat(preco);
-
-        String msg = "Cadastro realizado!";
-        if(!estoque.adicionarProduto(nome, descricao, precoParse)){
-            msg = "Cadastro não realizado!";
-        }else{
-            limpar();
-        }
-
-        Alert alert = new Alert(AlertType.INFORMATION,msg);
-        alert.showAndWait();
-        ltvProdutos.getItems().clear();
-        ltvProdutos.getItems().addAll(estoque.getProdutos());
-        tblProdutos.getItems().clear();
-        listarProdutos();
+        viewModel.cadastrar();
     }
     
     public void listarProdutos(){
-        ObservableList<Produto> data = FXCollections
-                .observableArrayList(estoque.getProdutos());
         idProduto.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
         nomeProduto.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
         precoProduto.setCellValueFactory(new PropertyValueFactory<>("precoProduto"));
-        tblProdutos.setItems(data);
-        tblProdutos.getColumns().addAll(idProduto, nomeProduto, precoProduto);
+        tblProdutos.setItems(viewModel.getProdutos());
     }
 
+    @FXML
+    private void cadastrar(){
+        viewModel.cadastrar();
+    }
+    
+    @FXML
     private void limpar(){
-        tfNome.clear();
-        tfDescri.clear();
-        tfPreco.clear();
+        viewModel.limpar();
+    }
+    
+    @FXML
+    private void atualizar(MouseEvent event){
+        if(event.getClickCount() == 2){
+            viewModel.atualizar();
+        }
     }
 
 }

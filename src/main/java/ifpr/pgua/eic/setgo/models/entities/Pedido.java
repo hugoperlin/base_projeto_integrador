@@ -1,4 +1,4 @@
-package ifpr.pgua.eic.setgo.models;
+package ifpr.pgua.eic.setgo.models.entities;
 
 import java.time.LocalDate;
 import java.util.Date;

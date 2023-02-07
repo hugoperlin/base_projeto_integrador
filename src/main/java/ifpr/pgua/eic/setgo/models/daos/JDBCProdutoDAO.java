@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 import ifpr.pgua.eic.setgo.models.FabricaConexoes;
-import ifpr.pgua.eic.setgo.models.Produto;
+import ifpr.pgua.eic.setgo.models.entities.Produto;
 import ifpr.pgua.eic.setgo.models.results.Result;
 
 public class JDBCProdutoDAO implements ProdutoDAO {

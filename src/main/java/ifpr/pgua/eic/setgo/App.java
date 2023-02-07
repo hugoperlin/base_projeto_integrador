@@ -1,38 +1,34 @@
 package ifpr.pgua.eic.setgo;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-
-import ifpr.pgua.eic.setgo.controllers.JanelaCadastro;
-import ifpr.pgua.eic.setgo.controllers.JanelaLista;
 import ifpr.pgua.eic.setgo.controllers.JanelaPedido;
 import ifpr.pgua.eic.setgo.controllers.JanelaPrincipal;
 import ifpr.pgua.eic.setgo.controllers.JanelaProduto;
-import ifpr.pgua.eic.setgo.models.Estoque;
-import ifpr.pgua.eic.setgo.models.ListaTelefonica;
+import ifpr.pgua.eic.setgo.controllers.ViewModels.JanelaProdutosViewModel;
+import ifpr.pgua.eic.setgo.models.FabricaConexoes;
+import ifpr.pgua.eic.setgo.models.daos.JDBCProdutoDAO;
+import ifpr.pgua.eic.setgo.models.daos.ProdutoDAO;
+import ifpr.pgua.eic.setgo.models.entities.Estoque;
+import ifpr.pgua.eic.setgo.models.repositories.GerenciadorEstoque;
+import ifpr.pgua.eic.setgo.models.repositories.ProdutoRepository;
 import ifpr.pgua.eic.setgo.utils.BaseAppNavigator;
-import ifpr.pgua.eic.setgo.utils.ScreenRegistry;
 import ifpr.pgua.eic.setgo.utils.ScreenRegistryFXML;
 
-/**
- * JavaFX App
- */
 public class App extends BaseAppNavigator {
-
-    private ListaTelefonica listaTelefonica;
+    private GerenciadorEstoque gerenciador;
     private Estoque estoque;
+    
+    private ProdutoDAO produtoDAO;
+    private ProdutoRepository produtoRepository;
 
     @Override
     public void init() throws Exception {
-        // TODO Auto-generated method stub
         super.init();
+        gerenciador = new GerenciadorEstoque(FabricaConexoes.getInstance());
+        
+        produtoDAO = new JDBCProdutoDAO(FabricaConexoes.getInstance());
+        produtoRepository = new ProdutoRepository(produtoDAO);
 
-        listaTelefonica = new ListaTelefonica();
         estoque = new Estoque();
     }
 
@@ -49,11 +45,8 @@ public class App extends BaseAppNavigator {
     @Override
     public void registrarTelas() {
         registraTela("PRINCIPAL", new ScreenRegistryFXML(App.class, "fxml/principal.fxml", o->new JanelaPrincipal()));
-        registraTela("CADASTRO", new ScreenRegistryFXML(App.class, "fxml/cadastro.fxml", o->new JanelaCadastro(listaTelefonica)));
-        registraTela("LISTA", new ScreenRegistryFXML(App.class, "fxml/listar.fxml", o->new JanelaLista(listaTelefonica)));
-        registraTela("PRODUTOS", new ScreenRegistryFXML(App.class, "fxml/produtos.fxml", o->new JanelaProduto(estoque)));
+        registraTela("PRODUTOS", new ScreenRegistryFXML(App.class, "fxml/produtos.fxml", o->new JanelaProduto(new JanelaProdutosViewModel(produtoRepository))));
         registraTela("PEDIDOS", new ScreenRegistryFXML(App.class, "fxml/pedidos.fxml", o->new JanelaPedido(estoque)));
-        
     }
 
     @Override

@@ -1,6 +1,6 @@
 package ifpr.pgua.eic.setgo.controllers.ViewModels;
 
-import ifpr.pgua.eic.setgo.models.Produto;
+import ifpr.pgua.eic.setgo.models.entities.Produto;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -12,7 +12,7 @@ public class ProdutoRow {
         this.produto = produto;
     }
 
-    public Produto getCliente(){
+    public Produto getProduto(){
         return produto;
     }
 
