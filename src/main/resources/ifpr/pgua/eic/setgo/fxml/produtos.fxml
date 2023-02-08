@@ -53,11 +53,6 @@
          GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
    <TableView fx:id="tblProdutos" GridPane.columnIndex="0" 
          GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.columnSpan="2">
-      <columns>
-         <TableColumn prefWidth="75.0" text="Id" fx:id="idProduto" />
-         <TableColumn prefWidth="75.0" text="Produto" fx:id="nomeProduto" />
-         <TableColumn prefWidth="75.0" text="Preço" fx:id="precoProduto" />
-      </columns>
    </TableView>
 
 </GridPane>

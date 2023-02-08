@@ -29,7 +29,6 @@ public class ProdutoRepository {
         Produto produto = new Produto(nome,descricao, preco);
         
         return dao.inserir(produto);
-            
     }
 
     public Result atualizarProduto(int id, String nome, String descricaoNova, 
@@ -52,6 +51,4 @@ public class ProdutoRepository {
         produtos = dao.buscarTodos();
         return Collections.unmodifiableList(produtos);
     }
-
-
 }

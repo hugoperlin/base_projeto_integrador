@@ -7,6 +7,9 @@ import ifpr.pgua.eic.setgo.controllers.ViewModels.JanelaProdutosViewModel;
 import ifpr.pgua.eic.setgo.controllers.ViewModels.ProdutoRow;
 import ifpr.pgua.eic.setgo.models.entities.Produto;
 import ifpr.pgua.eic.setgo.models.results.Result;
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,28 +18,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
-public class JanelaProduto implements Initializable {
-    
+public class JanelaProduto extends BaseController implements Initializable {
     @FXML
     private ListView<Produto> ltvProdutos;
 
     @FXML
     private TableView<ProdutoRow> tblProdutos;
-    
-    @FXML 
-    private TableColumn<ProdutoRow, String> idProduto; 
-
-    @FXML 
-    private TableColumn<ProdutoRow, String> nomeProduto; 
-
-    @FXML 
-    private TableColumn<ProdutoRow, String> descriProduto; 
-
-    @FXML 
-    private TableColumn<ProdutoRow, String> precoProduto; 
     
     @FXML 
     private Button btCadastrar;
@@ -49,38 +38,45 @@ public class JanelaProduto implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        listarProdutos();
+        TableColumn<ProdutoRow, Integer> idProdutoCol = new TableColumn<>("Id");
+        idProdutoCol.setCellValueFactory(
+                data -> new SimpleIntegerProperty(data.getValue()
+                    .getProduto().getId()).asObject());
+
+        TableColumn<ProdutoRow, String> nomeProdutoCol = new TableColumn<>("Produto");
+        nomeProdutoCol.setCellValueFactory(
+                data -> new SimpleStringProperty(data.getValue()
+                    .getProduto().getNome()));
+
+        TableColumn<ProdutoRow, String> descriProdutoCol = new TableColumn<>("Descrição");
+        descriProdutoCol.setCellValueFactory(
+                data -> new SimpleStringProperty(data.getValue()
+                    .getProduto().getNome()));
+
+        TableColumn<ProdutoRow, Float> precoProdutoCol = new TableColumn<>("Preço");
+        precoProdutoCol.setCellValueFactory(
+                data -> new SimpleFloatProperty(data.getValue()
+                    .getProduto().getPreco()).asObject());
+
+        tblProdutos.getColumns().addAll(
+                idProdutoCol,nomeProdutoCol,descriProdutoCol,precoProdutoCol);
+
+        //ligando a lista de ProdutoRow com a tabela
+        tblProdutos.setItems(viewModel.getProdutos());
+
         viewModel.selecionadoProperty().bind(tblProdutos.getSelectionModel().selectedItemProperty());
 
         viewModel.alertProperty().addListener((ChangeListener<Result>) (observable, oldVal, newVal) -> {
             BaseController.showMessage(newVal);
         });
 
-        //liga a propriedade texto do textfield nome com a propriedade do viewmodel
-        nomeProduto.textProperty().bindBidirectional(viewModel.nomeProperty());
-        //liga a propriedade editavel do textfield com a propriedade do viewmodel
-        nomeProduto.editableProperty().bind(viewModel.podeEditarProperty());
-        
-        
-        precoProduto.textProperty().bindBidirectional(viewModel.precoProperty());
-        precoProduto.editableProperty().bind(viewModel.podeEditarProperty());
-
-        descriProduto.textProperty().bindBidirectional(viewModel.descriProperty());
-        idProduto.textProperty().bindBidirectional(viewModel.idProperty());
-
         btCadastrar.textProperty().bind(viewModel.operacaoProperty());
     }
 
     @FXML
-    private void cadastrar(ActionEvent evento){
-        viewModel.cadastrar();
-    }
-    
-    public void listarProdutos(){
-        idProduto.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
-        nomeProduto.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
-        precoProduto.setCellValueFactory(new PropertyValueFactory<>("precoProduto"));
-        tblProdutos.setItems(viewModel.getProdutos());
+    void cadastrar(ActionEvent evento){
+        Result resultado = viewModel.cadastrar();
+        showMessage(resultado);
     }
 
     @FXML

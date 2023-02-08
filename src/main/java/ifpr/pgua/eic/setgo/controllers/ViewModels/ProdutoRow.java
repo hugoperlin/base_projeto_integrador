@@ -1,11 +1,14 @@
 package ifpr.pgua.eic.setgo.controllers.ViewModels;
 
 import ifpr.pgua.eic.setgo.models.entities.Produto;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class ProdutoRow {
-        
     private Produto produto;
             
     public ProdutoRow(Produto produto){
@@ -17,17 +20,17 @@ public class ProdutoRow {
     }
 
     /**
-    *      * Propriedade para representar o atributo id do produto.
-    *           * 
-    *                * @return SimpleStringProperty com o valor do id do produto.
-    *                     */
-    public StringProperty idProperty(){
-        return new SimpleStringProperty(String.valueOf(produto.getId()));
+    * Propriedade para representar o atributo id do produto.
+    * 
+    * @return SimpleStringProperty com o valor do id do produto.
+    */
+    public IntegerProperty idProperty(){
+        return new SimpleIntegerProperty(produto.getId());
     }
 
     /**
-    *      * Propriedade para representar o atributo nome do produto.
-    *           * 
+    * Propriedade para representar o atributo nome do produto.
+    * 
     * @return SimpleStringProperty com o valor do nome do produto.
     */
 
@@ -49,8 +52,11 @@ public class ProdutoRow {
     * 
     * @return SimpleStringProperty com o valor do email do produto.
     */
-    public StringProperty precoProperty(){
-        return new SimpleStringProperty(String.valueOf(produto.getPreco()));
+    public SimpleFloatProperty precoProperty(){
+        return new SimpleFloatProperty(produto.getPreco());
     }
 
+    public SimpleDoubleProperty quantidadeProperty(){
+        return new SimpleDoubleProperty(produto.getPreco());
+    }
 }

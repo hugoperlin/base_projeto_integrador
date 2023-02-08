@@ -3,6 +3,7 @@ package ifpr.pgua.eic.setgo.controllers.ViewModels;
 import ifpr.pgua.eic.setgo.models.entities.Produto;
 import ifpr.pgua.eic.setgo.models.repositories.ProdutoRepository;
 import ifpr.pgua.eic.setgo.models.results.Result;
+import ifpr.pgua.eic.setgo.models.results.SuccessResult;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -16,7 +17,7 @@ public class JanelaProdutosViewModel {
     private StringProperty idProduto = new SimpleStringProperty();    
     private StringProperty nomeProduto = new SimpleStringProperty();    
     private StringProperty descricao = new SimpleStringProperty();    
-    private StringProperty precoProduto = new SimpleStringProperty();    
+    private StringProperty precoProduto = new SimpleStringProperty("0.0");    
     
     private StringProperty operacao = new SimpleStringProperty("Cadastrar");
     private BooleanProperty podeEditar = new SimpleBooleanProperty(true);
@@ -33,11 +34,8 @@ public class JanelaProdutosViewModel {
     private ProdutoRepository repository;
 
     public JanelaProdutosViewModel(ProdutoRepository repository) {
-
         this.repository = repository;
-
         updateList();
-
     }
 
     /*
@@ -48,11 +46,12 @@ public class JanelaProdutosViewModel {
         obsProdutos.clear();
         for (Produto p : repository.getProdutos()) {
             obsProdutos.add(new ProdutoRow(p));
+            System.out.println( "\n\nPRODUTO:\n" + p.getNome() + "\n\n");
         }
     }
 
     public ObservableList<ProdutoRow> getProdutos() {
-        return this.obsProdutos;
+        return obsProdutos;
     }
 
     public ObjectProperty<Result> alertProperty() {
@@ -94,23 +93,28 @@ public class JanelaProdutosViewModel {
      * o botão de cadastrar for clicado na tela.
      */
 
-    public void cadastrar() {
+    public Result cadastrar() {
 
         // acessa os valores das propriedades, que por consequência
         // contém os valores digitados nos textfields.
-        int id = Integer.parseInt(idProduto.getValue());
+        //int id = Integer.parseInt(idProduto.getValue());
         String nome = nomeProduto.getValue();
         String descricao = this.descricao.getValue();
         float preco = Float.parseFloat(precoProduto.getValue());
 
         if (atualizar) {
-            repository.atualizarProduto(id, nome, descricao, preco);
+            //repository.atualizarProduto(nome, descricao, preco);
+            System.out.println("testeFail");
         } else {
             repository.adicionarProduto(nome, descricao, preco);
         }
 
-        updateList();
-        limpar();
+        Result resultado = repository.adicionarProduto(nome, descricao, preco);
+        if(resultado instanceof SuccessResult){
+            updateList();
+            limpar();
+        }
+        return resultado;
     }
 
     public void atualizar() {
@@ -118,7 +122,7 @@ public class JanelaProdutosViewModel {
         podeEditar.setValue(false);
         atualizar = true;
         Produto produto = selecionado.get().getProduto();
-        idProduto.setValue(String.valueOf(produto.getId()));
+        //idProduto.setValue(String.valueOf(produto.getId()));
         nomeProduto.setValue(produto.getNome());
         descricao.setValue(produto.getDescricao());
         precoProduto.setValue(String.valueOf(produto.getPreco()));
@@ -136,6 +140,4 @@ public class JanelaProdutosViewModel {
         atualizar = false;
         operacao.setValue("Cadastrar");
     }
-
-
 }
