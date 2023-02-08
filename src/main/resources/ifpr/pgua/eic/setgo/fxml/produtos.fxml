@@ -49,10 +49,9 @@
       <RowConstraints />
    </rowConstraints>
    <Label text="Produtos" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-   <ListView fx:id="ltvProdutos" GridPane.columnIndex="0" 
-         GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
    <TableView fx:id="tblProdutos" GridPane.columnIndex="0" 
-         GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.columnSpan="2">
-   </TableView>
+         GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.columnSpan="2" />
+   <ListView fx:id="ltvProdutos" GridPane.columnIndex="0" 
+         GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.columnSpan="2" />
 
 </GridPane>
