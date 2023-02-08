@@ -46,7 +46,6 @@ public class JanelaProdutosViewModel {
         obsProdutos.clear();
         for (Produto p : repository.getProdutos()) {
             obsProdutos.add(new ProdutoRow(p));
-            System.out.println( "\n\nPRODUTO:\n" + p.getNome() + "\n\n");
         }
     }
 
@@ -88,28 +87,21 @@ public class JanelaProdutosViewModel {
         return selecionado;
     }
 
-    /*
-     * Método que será invocado quando
-     * o botão de cadastrar for clicado na tela.
-     */
-
     public Result cadastrar() {
-
         // acessa os valores das propriedades, que por consequência
         // contém os valores digitados nos textfields.
-        //int id = Integer.parseInt(idProduto.getValue());
         String nome = nomeProduto.getValue();
         String descricao = this.descricao.getValue();
         float preco = Float.parseFloat(precoProduto.getValue());
+        Result resultado = null;
 
         if (atualizar) {
             //repository.atualizarProduto(nome, descricao, preco);
             System.out.println("testeFail");
         } else {
-            repository.adicionarProduto(nome, descricao, preco);
+            resultado = repository.adicionarProduto(nome, descricao, preco);
         }
 
-        Result resultado = repository.adicionarProduto(nome, descricao, preco);
         if(resultado instanceof SuccessResult){
             updateList();
             limpar();
@@ -122,7 +114,6 @@ public class JanelaProdutosViewModel {
         podeEditar.setValue(false);
         atualizar = true;
         Produto produto = selecionado.get().getProduto();
-        //idProduto.setValue(String.valueOf(produto.getId()));
         nomeProduto.setValue(produto.getNome());
         descricao.setValue(produto.getDescricao());
         precoProduto.setValue(String.valueOf(produto.getPreco()));

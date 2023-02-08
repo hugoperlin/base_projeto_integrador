@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 public class JanelaProduto extends BaseController implements Initializable {
@@ -26,6 +27,15 @@ public class JanelaProduto extends BaseController implements Initializable {
 
     @FXML
     private TableView<ProdutoRow> tblProdutos;
+    
+    @FXML
+    private TextField tfNome;
+    
+    @FXML
+    private TextField tfDescri;
+    
+    @FXML
+    private TextField tfPreco;
     
     @FXML 
     private Button btCadastrar;
@@ -51,7 +61,7 @@ public class JanelaProduto extends BaseController implements Initializable {
         TableColumn<ProdutoRow, String> descriProdutoCol = new TableColumn<>("Descrição");
         descriProdutoCol.setCellValueFactory(
                 data -> new SimpleStringProperty(data.getValue()
-                    .getProduto().getNome()));
+                    .getProduto().getDescricao()));
 
         TableColumn<ProdutoRow, Float> precoProdutoCol = new TableColumn<>("Preço");
         precoProdutoCol.setCellValueFactory(
@@ -69,6 +79,10 @@ public class JanelaProduto extends BaseController implements Initializable {
         viewModel.alertProperty().addListener((ChangeListener<Result>) (observable, oldVal, newVal) -> {
             BaseController.showMessage(newVal);
         });
+        
+        tfNome.textProperty().bindBidirectional(viewModel.nomeProperty());
+        tfDescri.textProperty().bindBidirectional(viewModel.descriProperty());
+        tfPreco.textProperty().bindBidirectional(viewModel.precoProperty());
 
         btCadastrar.textProperty().bind(viewModel.operacaoProperty());
     }
@@ -77,11 +91,6 @@ public class JanelaProduto extends BaseController implements Initializable {
     void cadastrar(ActionEvent evento){
         Result resultado = viewModel.cadastrar();
         showMessage(resultado);
-    }
-
-    @FXML
-    private void cadastrar(){
-        viewModel.cadastrar();
     }
     
     @FXML
