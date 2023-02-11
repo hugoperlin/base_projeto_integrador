@@ -5,24 +5,28 @@ public class Produto {
     private String nomeProduto;    
     private String descricao;    
     private float precoProduto;    
+    private double quantidade;
     
-    public Produto(int id, String nome, String descricao, float preco){
+    public Produto(int id, String nome, String descricao, float preco, double quant){
         this.idProduto = id;
         this.nomeProduto = nome;
         this.descricao = descricao;
         this.precoProduto = preco;
+        this.quantidade = quant;
     }
 
-    public Produto(int id, String nome, float preco){
+    public Produto(int id, String nome, float preco, double quant){
         this.idProduto = id;
         this.nomeProduto = nome;
         this.precoProduto = preco;
+        this.quantidade = quant;
     }
     
-    public Produto(String nome, String descricao, float preco){
+    public Produto(String nome, String descricao, float preco, double quant){
         this.nomeProduto = nome;
         this.descricao = descricao;
         this.precoProduto = preco;
+        this.quantidade = quant;
     }
 
     public int getId(){
@@ -57,4 +61,12 @@ public class Produto {
         this.precoProduto = preco;
     }
     
+    public double getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(double quantidade) {
+        this.quantidade = quantidade;
+    }
+
 }

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -18,12 +21,10 @@
           xmlns="http://javafx.com/javafx/18" 
           xmlns:fx="http://javafx.com/fxml/1" 
           fx:controller="ifpr.pgua.eic.setgo.controllers.JanelaPedido"
-          stylesheets="@../css/estilo.css;@../css/estilo_cadastro.css"
-          
-          >
-          
-    <Label  text="Id:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-    <TextField  fx:id="tfIdPedido"  GridPane.columnIndex="1" GridPane.rowIndex="0" />
+          stylesheets="@../css/estilo.css;@../css/estilo_cadastro.css">
+
+    <Label  text="Produto:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <ComboBox  fx:id="cbProdutos"  GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
     <Label text="Data:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
     <DatePicker fx:id="tfData" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -37,6 +38,15 @@
     </HBox>
 
     <ListView fx:id="ltvPedidos" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+    <TableView fx:id="tbProdutos" prefHeight="200.0" prefWidth="200.0">
+      <columns>
+        <TableColumn fx:id="tbcProduto" prefWidth="191.0" text="Produto" />
+        <TableColumn fx:id="tbcQuantidade" prefWidth="123.0" text="Quantidade" />
+        <TableColumn fx:id="tbcValorItem" prefWidth="123.0" text="Valor  " />
+        <TableColumn fx:id="tbcValor" prefWidth="123.0" text="Valor Total" />
+      </columns>
+    </TableView>
 
    <columnConstraints>
       <ColumnConstraints />

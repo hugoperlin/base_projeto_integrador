@@ -17,7 +17,8 @@ public class ProdutoRepository {
         this.dao = dao;
     }
 
-    public Result adicionarProduto(String nome, String descricao, float preco){
+    public Result adicionarProduto(String nome, String descricao,
+            float preco, double quant){
 
         Optional<Produto> busca = produtos.stream()
                 .filter((p)->p.getNome().equals(nome)).findFirst();
@@ -26,7 +27,7 @@ public class ProdutoRepository {
             return Result.fail("Produto já cadastrado!");
         }
 
-        Produto produto = new Produto(nome,descricao, preco);
+        Produto produto = new Produto(nome,descricao, preco, quant);
         
         return dao.inserir(produto);
     }

@@ -2,20 +2,20 @@ package ifpr.pgua.eic.setgo.models.entities;
 
 public class ItensPedido {
     private Produto produto;
-    private int quantidade;       
+    private double quantidade;       
     private float preco;
     
-    public ItensPedido(Produto produto, int quantidade) {       
+    public ItensPedido(Produto produto, double quantidade) {       
         this.produto = produto;
         this.quantidade = quantidade;
-        this.preco = produto.getPreco()*quantidade;
+        this.preco = (float) ((float) produto.getPreco()*quantidade);
     }
 
-    public int getQuantidade() {
+    public double getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(double quantidade) {
         this.quantidade = quantidade;
     }
 

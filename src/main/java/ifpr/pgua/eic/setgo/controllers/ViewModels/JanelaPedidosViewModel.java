@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import ifpr.pgua.eic.setgo.models.entities.ItemsPedido;
+import ifpr.pgua.eic.setgo.models.entities.ItemPedido;
 import ifpr.pgua.eic.setgo.models.entities.ItensPedido;
 import ifpr.pgua.eic.setgo.models.entities.Produto;
 import ifpr.pgua.eic.setgo.models.entities.Pedido;
@@ -29,8 +29,9 @@ public class JanelaPedidosViewModel {
     private ObjectProperty<Produto> produtoProperty = new SimpleObjectProperty<>();
 
     private ObservableList<Produto> produtos = FXCollections.observableArrayList();
-
-    private ObservableList<ItensPedido> itensPedido = FXCollections.observableArrayList();
+    private ObservableList<ItensPedido> itens = FXCollections.observableArrayList();
+    
+    private Pedido pedido;
     
     private ProdutoRepository produtosRepository;
 
@@ -41,15 +42,15 @@ public class JanelaPedidosViewModel {
         dataProperty.set(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(dataHora));
     }
 
+    public ObservableList<ItensPedido> getItens(){
+        return itens;
+    }
+    
     public ObservableList<Produto> getProdutos(){
         return produtos;
     }
 
-    public ObservableList<ItensPedido> getItensVenda(){
-        return itensPedido;
-    }
-
-    public void carregaListas(){
+    public void carregaLista(){
         produtos.clear();
         produtos.addAll(produtosRepository.getProdutos());
     }
@@ -87,28 +88,25 @@ public class JanelaPedidosViewModel {
             return Result.fail("Quantidade deve ser maior que 0!");
         }
 
-        // ItensPedido item = new ItemVenda();
-        // Produto produto = produtoProperty.get();
-        // item.setProduto(produto);
-        // item.setQuantidade(quantidade);
-        // item.setValorTotal(produto.getPreco());
+        Produto produto = produtoProperty.get();
+        ItensPedido item = new ItensPedido(produto, quantidade);
 
-        // itensPedido.add(item);
+        pedido.add(item);
 
-        // quantidadeProperty.set("");
+        quantidadeProperty.set("");
 
-        // double valor=0;
+        double valor=0;
 
-        // valor = itensVenda.stream().map(it->it.getQuantidade()*it.getProduto().getValor()).reduce(0.0,Double::sum);
+        valor = pedido.getItens().stream().map(it->it.getQuantidade()*it.getProduto().getPreco()).reduce(0.0,Double::sum);
 
-        // valorTotalProperty.setValue("R$ "+valor);
+        valorTotalProperty.setValue("R$ "+valor);
         
          return Result.success("Adicionado!");
 
     }
 
-    public Result finalizarVenda(){
-        if(itensPedido.size() == 0){
+    public Result finalizarPedido(){
+        if(pedido.size() == 0){
             return Result.fail("Não foram inseridos produtos!");
         }
 

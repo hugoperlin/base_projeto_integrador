@@ -30,12 +30,14 @@ public class JDBCProdutoDAO implements ProdutoDAO {
            ArrayList<Produto> produtos = new ArrayList<>();
            
            while(result.next()){
+               //nomes das colunas na tabela do bd
                Integer id = result.getInt("id");
                String nome = result.getString("nome");
                String descricao = result.getString("descricao");
                float preco = result.getFloat("preco");
+               double quant = result.getDouble("quantidade");
                
-               Produto produto = new Produto(id, nome, descricao, preco);
+               Produto produto = new Produto(id, nome, descricao, preco, quant);
                
                produtos.add(produto);
            }
@@ -58,11 +60,12 @@ public class JDBCProdutoDAO implements ProdutoDAO {
             Connection con = fabricaConexoes.getConnection();
             
             PreparedStatement prep = con
-                    .prepareStatement("INSERT INTO produtos (nome,descricao,preco) VALUES (?,?,?)");
+                    .prepareStatement("INSERT INTO produtos (nome,descricao,preco,quantidade) VALUES (?,?,?,?)");
             
             prep.setString(1, produto.getNome());
             prep.setString(2, produto.getDescricao());
             prep.setFloat(3, produto.getPreco());
+            prep.setDouble(4, produto.getQuantidade());
             
             prep.executeUpdate();
             

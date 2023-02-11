@@ -39,12 +39,6 @@ public class GerenciadorEstoque{
         this.fabricaConexoes = fabricaConexoes;
     }
 
-    public void geraFakes(){
-        produtos.add(new Produto(1, "batata", "kg", (float) 12.87));
-        produtos.add(new Produto(1, "feijao", "kg", (float)12.87));
-        produtos.add(new Produto(1, "arroz", "kg", (float)12.87));
-    }
-    
     // public Venda getVendaAtual(){
     //     return venda;
     // }

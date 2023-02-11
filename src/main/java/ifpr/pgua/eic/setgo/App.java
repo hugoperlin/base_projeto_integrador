@@ -4,6 +4,7 @@ package ifpr.pgua.eic.setgo;
 import ifpr.pgua.eic.setgo.controllers.JanelaPedido;
 import ifpr.pgua.eic.setgo.controllers.JanelaPrincipal;
 import ifpr.pgua.eic.setgo.controllers.JanelaProduto;
+import ifpr.pgua.eic.setgo.controllers.ViewModels.JanelaPedidosViewModel;
 import ifpr.pgua.eic.setgo.controllers.ViewModels.JanelaProdutosViewModel;
 import ifpr.pgua.eic.setgo.models.FabricaConexoes;
 import ifpr.pgua.eic.setgo.models.daos.JDBCProdutoDAO;
@@ -46,7 +47,7 @@ public class App extends BaseAppNavigator {
     public void registrarTelas() {
         registraTela("PRINCIPAL", new ScreenRegistryFXML(App.class, "fxml/principal.fxml", o->new JanelaPrincipal()));
         registraTela("PRODUTOS", new ScreenRegistryFXML(App.class, "fxml/produtos.fxml", o->new JanelaProduto(new JanelaProdutosViewModel(produtoRepository))));
-        registraTela("PEDIDOS", new ScreenRegistryFXML(App.class, "fxml/pedidos.fxml", o->new JanelaPedido(estoque)));
+        registraTela("PEDIDOS", new ScreenRegistryFXML(App.class, "fxml/pedidos.fxml", o->new JanelaPedido(new JanelaPedidosViewModel(produtoRepository))));
     }
 
     @Override

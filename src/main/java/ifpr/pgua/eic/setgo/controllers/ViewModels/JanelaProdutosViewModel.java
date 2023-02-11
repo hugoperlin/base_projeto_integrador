@@ -18,6 +18,7 @@ public class JanelaProdutosViewModel {
     private StringProperty nomeProduto = new SimpleStringProperty();    
     private StringProperty descricao = new SimpleStringProperty();    
     private StringProperty precoProduto = new SimpleStringProperty("0.0");    
+    private StringProperty quantProduto = new SimpleStringProperty("0.0");    
     
     private StringProperty operacao = new SimpleStringProperty("Cadastrar");
     private BooleanProperty podeEditar = new SimpleBooleanProperty(true);
@@ -82,6 +83,10 @@ public class JanelaProdutosViewModel {
     public StringProperty idProperty() {
         return this.idProduto;
     }
+    
+    public StringProperty quantProperty(){
+        return this.quantProduto;
+    }
 
     public ObjectProperty<ProdutoRow> selecionadoProperty() {
         return selecionado;
@@ -93,13 +98,14 @@ public class JanelaProdutosViewModel {
         String nome = nomeProduto.getValue();
         String descricao = this.descricao.getValue();
         float preco = Float.parseFloat(precoProduto.getValue());
+        double quant = Double.parseDouble(quantProduto.getValue());
         Result resultado = null;
 
         if (atualizar) {
             //repository.atualizarProduto(nome, descricao, preco);
             System.out.println("testeFail");
         } else {
-            resultado = repository.adicionarProduto(nome, descricao, preco);
+            resultado = repository.adicionarProduto(nome, descricao, preco, quant);
         }
 
         if(resultado instanceof SuccessResult){

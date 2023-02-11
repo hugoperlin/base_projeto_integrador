@@ -7,6 +7,7 @@ import ifpr.pgua.eic.setgo.controllers.ViewModels.JanelaProdutosViewModel;
 import ifpr.pgua.eic.setgo.controllers.ViewModels.ProdutoRow;
 import ifpr.pgua.eic.setgo.models.entities.Produto;
 import ifpr.pgua.eic.setgo.models.results.Result;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -36,6 +37,9 @@ public class JanelaProduto extends BaseController implements Initializable {
     
     @FXML
     private TextField tfPreco;
+    
+    @FXML
+    private TextField tfQuant;
     
     @FXML 
     private Button btCadastrar;
@@ -68,8 +72,13 @@ public class JanelaProduto extends BaseController implements Initializable {
                 data -> new SimpleFloatProperty(data.getValue()
                     .getProduto().getPreco()).asObject());
 
+        TableColumn<ProdutoRow, Double> quantProdutoCol = new TableColumn<>("Quantidade");
+        quantProdutoCol.setCellValueFactory(
+                data -> new SimpleDoubleProperty(data.getValue()
+                    .getProduto().getQuantidade()).asObject());
+
         tblProdutos.getColumns().addAll(
-                idProdutoCol,nomeProdutoCol,descriProdutoCol,precoProdutoCol);
+                idProdutoCol,nomeProdutoCol,descriProdutoCol,precoProdutoCol,quantProdutoCol);
 
         //ligando a lista de ProdutoRow com a tabela
         tblProdutos.setItems(viewModel.getProdutos());
@@ -83,6 +92,7 @@ public class JanelaProduto extends BaseController implements Initializable {
         tfNome.textProperty().bindBidirectional(viewModel.nomeProperty());
         tfDescri.textProperty().bindBidirectional(viewModel.descriProperty());
         tfPreco.textProperty().bindBidirectional(viewModel.precoProperty());
+        tfQuant.textProperty().bindBidirectional(viewModel.quantProperty());
 
         btCadastrar.textProperty().bind(viewModel.operacaoProperty());
     }

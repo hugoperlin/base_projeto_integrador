@@ -16,9 +16,10 @@ public class Estoque {
         pedidos = new ArrayList<>();
     }
 
-    public boolean adicionarProduto(String nome, String descricao, float preco){
+    public boolean adicionarProduto(String nome, String descricao,
+            float preco, double quant){
         if(buscar(nome) == null){
-            Produto produto = new Produto(nome, descricao, preco);
+            Produto produto = new Produto(nome, descricao, preco, quant);
             produtos.add(produto);
             return true;
         }
