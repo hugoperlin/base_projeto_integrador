@@ -47,7 +47,7 @@ public class App extends BaseAppNavigator {
     public void registrarTelas() {
         registraTela("PRINCIPAL", new ScreenRegistryFXML(App.class, "fxml/principal.fxml", o->new JanelaPrincipal()));
         registraTela("PRODUTOS", new ScreenRegistryFXML(App.class, "fxml/produtos.fxml", o->new JanelaProduto(new JanelaProdutosViewModel(produtoRepository))));
-        registraTela("PEDIDOS", new ScreenRegistryFXML(App.class, "fxml/pedidos.fxml", o->new JanelaPedido(new JanelaPedidosViewModel(produtoRepository))));
+        registraTela("PEDIDOS", new ScreenRegistryFXML(App.class, "fxml/pedidos.fxml", o->new JanelaPedido(new JanelaPedidosViewModel(produtoRepository), estoque)));
     }
 
     @Override

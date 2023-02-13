@@ -29,10 +29,13 @@ public class JanelaPedido implements Initializable {
     private TextField tfIdPedido;
 
     @FXML
-    private TextField tfValorTotal;
+    private TextField tfQuantidade;
 
     @FXML
-    private ListView<Pedido> ltvPedidos;
+    private TextField tfValor;
+
+    @FXML
+    private ListView<ItensPedido> ltvPedidos;
     
     @FXML
     private ComboBox<Produto> cbProdutos;
@@ -41,36 +44,40 @@ public class JanelaPedido implements Initializable {
     private TableView<Produto> tbProdutos;
     
     @FXML
-    private TableColumn<ItensPedido,String> tbcProduto;
+    private TableColumn<Produto,String> tbcProduto;
 
     @FXML
-    private TableColumn<ItensPedido,Double> tbcQuantidade;
+    private TableColumn<Produto,Double> tbcQuantidade;
 
     @FXML
-    private TableColumn<ItensPedido,Float> tbcValor;
+    private TableColumn<Produto,Float> tbcValor;
 
     @FXML
-    private TableColumn<ItensPedido,Float> tbcValorItem;
+    private TableColumn<Produto,String> tbcDescricao;
+
+    Pedido pedido;
 
     private Estoque estoque;
     
     private JanelaPedidosViewModel viewModel;
 
-    public JanelaPedido(JanelaPedidosViewModel viewModel){
+    public JanelaPedido(JanelaPedidosViewModel viewModel, Estoque estoque){
         this.viewModel= viewModel;
+        this.estoque = estoque;
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        this.pedido = new Pedido(LocalDate.now());
         cbProdutos.setItems(viewModel.getProdutos());;
         //ltvPedidos.getItems().addAll(estoque.getPedidos());
         
         tbcProduto.setCellValueFactory(item -> new SimpleStringProperty(
-                item.getValue().getProduto().getNome()));   
+                item.getValue().getNome()));   
+        tbcDescricao.setCellValueFactory(item -> new SimpleStringProperty(
+                item.getValue().getDescricao()));   
         tbcQuantidade.setCellValueFactory(item -> new SimpleDoubleProperty(
                 item.getValue().getQuantidade()).asObject());   
-        tbcValorItem.setCellValueFactory(item -> new SimpleFloatProperty(
-                item.getValue().getProduto().getPreco()).asObject());   
         tbcValor.setCellValueFactory(item -> new SimpleFloatProperty(
                 item.getValue().getPreco()).asObject());
         
@@ -80,24 +87,38 @@ public class JanelaPedido implements Initializable {
     }
 
     @FXML
-    private void registrarPedido(ActionEvent evento){
-        int idPedido = Integer.parseInt(tfIdPedido.getText());
-        float precoParse = Float.parseFloat(tfValorTotal.getText());
-    
+    private void registrarItens(ActionEvent evento){
+        Produto produto = cbProdutos.getValue();
+        double quantidade = Double.parseDouble(tfQuantidade.getText());
+        //float precoParse = (float) (quantidade*produto.getPreco());
 
-        if(estoque.adicionarPedido(idPedido, LocalDate.now(), precoParse)){
-            Alert alert = new Alert(AlertType.INFORMATION,"Pedido realizado");
-                alert.showAndWait();
-                limpar();
-        }else{
-                Alert alert = new Alert(AlertType.INFORMATION,"Pedido Não Realizado");
-                alert.showAndWait();  
-        }
-        ltvPedidos.getItems().addAll(estoque.getPedidos());
+        ItensPedido itens = new ItensPedido(produto, quantidade);
+
+        //tfValor.setText(String.valueOf(itens.getPreco()));
+
+        // if(estoque.adicionarPedido(idPedido, LocalDate.now(), precoParse)){
+        //     Alert alert = new Alert(AlertType.INFORMATION,"Pedido realizado");
+        //         alert.showAndWait();
+        //         limpar();
+        // }else{
+        //         Alert alert = new Alert(AlertType.INFORMATION,"Pedido Não Realizado");
+        //         alert.showAndWait();  
+        // }
+
+        pedido.add(itens);        
+
+        ltvPedidos.getItems().addAll(pedido.getItens());
+        limpar();
+    }
+
+    @FXML
+    private void registrarPedido(ActionEvent evento){
+        limpar();
     }
 
     private void limpar(){
-        tfIdPedido.clear();
-        tfValorTotal.clear();
+        tfQuantidade.clear();
+        cbProdutos.setValue(null);
+        //tfValor.clear();
     }
 }
