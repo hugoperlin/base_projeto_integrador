@@ -48,6 +48,7 @@ public class Pedido {
         for(ItensPedido itensPedido : itens){
             total = (float) (total + (itensPedido.getProduto().getPreco()*itensPedido.getQuantidade()));
         }
+        this.valorTotal = total;
         return valorTotal;
     }
 

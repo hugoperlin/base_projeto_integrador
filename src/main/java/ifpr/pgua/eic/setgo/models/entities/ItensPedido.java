@@ -53,7 +53,7 @@ public class ItensPedido {
 
     @Override
     public String toString(){
-        return "Produto: " +produto.getDescricao()+ " Quantidade: " +quantidade+ " Preço: " +preco;
+        return "Produto: " +produto.getNome()+ " Quantidade: " +quantidade+ " Preço: " +preco;
     }
     
 }

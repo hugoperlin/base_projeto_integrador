@@ -7,5 +7,5 @@ import ifpr.pgua.eic.setgo.models.results.Result;
 
 public interface ItensPedidoDAO {
     ArrayList<ItensPedido> buscarTodos();
-    Result inserir(ItensPedido itens);
+    Result inserir(ItensPedido itens, int pedidoId);
 }

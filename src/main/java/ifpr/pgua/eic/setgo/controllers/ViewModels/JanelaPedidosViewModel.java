@@ -5,10 +5,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import ifpr.pgua.eic.setgo.models.entities.ItemPedido;
 import ifpr.pgua.eic.setgo.models.entities.ItensPedido;
 import ifpr.pgua.eic.setgo.models.entities.Produto;
 import ifpr.pgua.eic.setgo.models.entities.Pedido;
+import ifpr.pgua.eic.setgo.models.repositories.ItensPedidoRepository;
+import ifpr.pgua.eic.setgo.models.repositories.PedidosRepository;
 import ifpr.pgua.eic.setgo.models.repositories.ProdutoRepository;
 import ifpr.pgua.eic.setgo.models.results.Result;
 import javafx.beans.Observable;
@@ -29,17 +30,31 @@ public class JanelaPedidosViewModel {
     private ObjectProperty<Produto> produtoProperty = new SimpleObjectProperty<>();
 
     private ObservableList<Produto> produtos = FXCollections.observableArrayList();
+    private ObservableList<Pedido> obsPedidos = FXCollections.observableArrayList();
     private ObservableList<ItensPedido> itens = FXCollections.observableArrayList();
     
     private Pedido pedido;
     
     private ProdutoRepository produtosRepository;
+    private ItensPedidoRepository itensRepository;
+    private PedidosRepository pedidosRepository;
 
-    public JanelaPedidosViewModel(ProdutoRepository produtosRepository){
+    public JanelaPedidosViewModel(ProdutoRepository produtosRepository, 
+            ItensPedidoRepository itensRepository, PedidosRepository pedidosRepository){
         this.produtosRepository = produtosRepository;
+        this.itensRepository = itensRepository;
+        this.pedidosRepository = pedidosRepository;
 
         dataHora = LocalDateTime.now();
         dataProperty.set(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(dataHora));
+        updateList();
+    }
+
+    private void updateList() {
+        obsPedidos.clear();
+        for (Pedido p : pedidosRepository.getPedidos()) {
+            obsPedidos.add(p);
+        }
     }
 
     public ObservableList<ItensPedido> getItens(){
@@ -73,7 +88,7 @@ public class JanelaPedidosViewModel {
 
     public Result adicionaItem(){
         
-        if(produtoProperty.get() == null){
+        if(pedido.getItens() == null){
             return Result.fail("Nenhum produto adicionado!");
         }
 
@@ -99,20 +114,17 @@ public class JanelaPedidosViewModel {
 
         valor = pedido.getItens().stream().map(it->it.getQuantidade()*it.getProduto().getPreco()).reduce(0.0,Double::sum);
 
-        valorTotalProperty.setValue("R$ "+valor);
+        valorTotalProperty.setValue("R$"+valor);
         
          return Result.success("Adicionado!");
 
     }
 
-    public Result finalizarPedido(){
+    public Result registrarPedido(Pedido pedido){
         if(pedido.size() == 0){
             return Result.fail("Não foram inseridos produtos!");
         }
-
-
-        // Venda venda = new Venda(cliente, dataHora);
-        // venda.setItens(itensVenda);
+        pedidosRepository.adicionarPedido(pedido);
 
         return Result.success("Finalizada!");
 

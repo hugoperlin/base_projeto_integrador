@@ -79,7 +79,7 @@ public class JDBCPedidoDAO implements PedidoDAO {
             prep.close();
             con.close();
 
-            pedido.getItens().forEach(gt -> inserirItem(auto_id, gt.getId()));
+            pedido.getItens().forEach(gt -> inserirItem(auto_id, gt));
             
             return Result.success("Tudo certo!!!! TOme!!");
         } catch (Exception e) {
@@ -87,7 +87,30 @@ public class JDBCPedidoDAO implements PedidoDAO {
         }
     }
         
-    public Result inserirItem(int PedidoId, int itensId){
+    public Result inserirItem(int pedidoId, ItensPedido itens){
+        try {
+            Connection con = fabricaConexoes.getConnection();
+            
+            PreparedStatement prep = con.prepareStatement(
+                    "INSERT INTO itensPedido (idProduto,quantidade,valor,idPedido) VALUES (?,?,?,?)");
+            
+            prep.setInt(1, itens.getProduto().getId());
+            prep.setDouble(2, itens.getQuantidade());
+            prep.setFloat(3, itens.getPreco());
+            prep.setInt(4, pedidoId);
+            
+            prep.executeUpdate();
+            
+            prep.close();
+            con.close();
+            
+            return Result.success("Itens Pedido Atualizado");
+        } catch (Exception e) {
+            return Result.fail(e.getMessage());
+        }
+        
+    }
+    public Result atualizarItem(int PedidoId, int itensId){
         try {
             Connection con = fabricaConexoes.getConnection();
             
@@ -102,7 +125,7 @@ public class JDBCPedidoDAO implements PedidoDAO {
             prep.close();
             con.close();
             
-            return Result.success("Itens Pedido Inserido");
+            return Result.success("Itens Pedido Atualizado");
         } catch (Exception e) {
             return Result.fail(e.getMessage());
         }

@@ -59,7 +59,7 @@ public class JDBCItensPedidoDAO implements ItensPedidoDAO {
     }
 
     @Override
-    public Result inserir(ItensPedido itens){
+    public Result inserir(ItensPedido itens, int pedidoId){
         try {
             Connection con = fabricaConexoes.getConnection();
             
@@ -69,6 +69,7 @@ public class JDBCItensPedidoDAO implements ItensPedidoDAO {
             prep.setInt(1, itens.getProduto().getId());
             prep.setFloat(2, itens.getPreco());
             prep.setDouble(3, itens.getQuantidade());
+            prep.setInt(4, pedidoId);
             
             prep.executeUpdate();
             
