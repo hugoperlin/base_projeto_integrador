@@ -17,6 +17,12 @@ public class Pedido {
         this.valorTotal = valorTotal;
     }
 
+    public Pedido(LocalDate data){
+        this.data = data;
+        this.itens = new ArrayList<ItensPedido>();
+        this.valorTotal = (float) this.itens.stream().mapToDouble(n -> n.getPreco()).sum();
+    }
+
     public void add(ItensPedido itemPedido){
         this.itens.add(itemPedido);
     } 

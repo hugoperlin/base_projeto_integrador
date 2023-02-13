@@ -26,13 +26,9 @@ public class Estoque {
         return false;
     }
 
-    public boolean adicionarPedido(int id, LocalDate data, float total){
-        if(buscarPedido(id) == null){
-            Pedido pedido = new Pedido(id, data, total);
-            pedidos.add(pedido);
-            return true;
-        }
-        return false;
+    public boolean adicionarPedido(Pedido pedido){
+        pedidos.add(pedido);
+        return true;
     }
 
     public Produto buscar(String nome){

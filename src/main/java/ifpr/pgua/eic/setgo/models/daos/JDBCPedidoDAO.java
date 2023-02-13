@@ -3,31 +3,32 @@ package ifpr.pgua.eic.setgo.models.daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import ifpr.pgua.eic.setgo.models.FabricaConexoes;
-import ifpr.pgua.eic.setgo.models.entities.Produto;
+import ifpr.pgua.eic.setgo.models.entities.Pedido;
 import ifpr.pgua.eic.setgo.models.results.Result;
 
-public class JDBCProdutoDAO implements ProdutoDAO {
+public class JDBCPedidoDAO implements PedidoDAO {
     private FabricaConexoes fabricaConexoes;
     
-    public JDBCProdutoDAO(FabricaConexoes fabricaConexoes){
+    public JDBCPedidoDAO(FabricaConexoes fabricaConexoes){
         this.fabricaConexoes = fabricaConexoes;
     }
     
     @Override
-    public List<Produto> buscarTodos(){
+    public List<Pedido> buscarTodos(){
         try {
            Connection con = fabricaConexoes.getConnection();
            
-           PreparedStatement prep = con.prepareStatement("SELECT * FROM produtos");
+           PreparedStatement prep = con.prepareStatement("SELECT * FROM pedidos");
            
            ResultSet result = prep.executeQuery();
            
-           ArrayList<Produto> produtos = new ArrayList<>();
+           ArrayList<Pedido> pedidos = new ArrayList<>();
            
            while(result.next()){
                //nomes das colunas na tabela do bd
@@ -37,16 +38,16 @@ public class JDBCProdutoDAO implements ProdutoDAO {
                float preco = result.getFloat("valor");
                double quant = result.getDouble("quantidade");
                
-               Produto produto = new Produto(id, nome, descricao, preco, quant);
+               Pedido pedido = new Pedido(LocalDate.now());
                
-               produtos.add(produto);
+               pedidos.add(pedido);
            }
            
            result.close();
            prep.close();
            con.close();
            
-           return produtos;
+           return pedidos;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return Collections.emptyList();
@@ -55,17 +56,17 @@ public class JDBCProdutoDAO implements ProdutoDAO {
     }
 
     @Override
-    public Result inserir(Produto produto){
+    public Result inserir(Pedido pedido){
         try {
             Connection con = fabricaConexoes.getConnection();
             
             PreparedStatement prep = con
-                    .prepareStatement("INSERT INTO produtos (nome,descricao,valor,quantidade) VALUES (?,?,?,?)");
+                    .prepareStatement("INSERT INTO pedidos (nome,descricao,valor,quantidade) VALUES (?,?,?,?)");
             
-            prep.setString(1, produto.getNome());
-            prep.setString(2, produto.getDescricao());
-            prep.setFloat(3, produto.getPreco());
-            prep.setDouble(4, produto.getQuantidade());
+            prep.setNString(1, pedido.getData());
+            prep.setString(2, pedido.getDescricao());
+            prep.setFloat(3, pedido.getPreco());
+            prep.setDouble(4, pedido.getQuantidade());
             
             prep.executeUpdate();
             

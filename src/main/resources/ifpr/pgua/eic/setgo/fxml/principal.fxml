@@ -11,7 +11,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx" 
       xmlns:fx="http://javafx.com/fxml" 
-      prefHeight="400" prefWidth="600"
+      prefHeight="800" prefWidth="1200"
       fx:controller="ifpr.pgua.eic.setgo.controllers.JanelaPrincipal"
       >
    <padding>
