@@ -8,4 +8,5 @@ import ifpr.pgua.eic.setgo.models.results.Result;
 public interface ProdutoDAO {
     List<Produto> buscarTodos();
     Result inserir(Produto Produto);
+    Produto findById(int id);
 }

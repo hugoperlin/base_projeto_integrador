@@ -82,6 +82,9 @@ public class JanelaPedido implements Initializable {
                 item.getValue().getPreco()).asObject());
         
         tbProdutos.setItems(viewModel.getProdutos());
+
+        tfQuantidade.setText("0.0");
+        tfValor.setText("0.0");;
         
         viewModel.carregaLista();
     }
@@ -113,12 +116,25 @@ public class JanelaPedido implements Initializable {
 
     @FXML
     private void registrarPedido(ActionEvent evento){
+        Pedido novoPedido = new Pedido(LocalDate.now());
+        viewModel.registrarPedido(pedido);
         limpar();
+        pedido = novoPedido;
     }
 
     private void limpar(){
-        tfQuantidade.clear();
+        tfQuantidade.setText("0.0");
         cbProdutos.setValue(null);
-        //tfValor.clear();
+        ltvPedidos.getItems().clear();
+        update();
+    }
+
+    private void update(){
+        float valor = 0;
+        if(pedido.getItens() != null){
+            valor = pedido.getValorTotal();
+        }
+        tfValor.setText(String.valueOf(valor));
+        ltvPedidos.getItems().addAll(pedido.getItens());
     }
 }

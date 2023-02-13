@@ -30,7 +30,7 @@
     <TextField  fx:id="tfQuantidade"  GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
     <Label text="Valor Total:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-    <TextField fx:id="tfValorTotal" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <TextField fx:id="tfValor" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
     <HBox GridPane.columnIndex="1" GridPane.rowIndex="4">
         <Button onAction="#registrarItens" text="Registrar" />
@@ -39,7 +39,7 @@
 
     <ListView fx:id="ltvPedidos" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
 
-    <HBox GridPane.columnIndex="1" GridPane.rowIndex="6">
+    <HBox GridPane.columnIndex="0" GridPane.rowIndex="6">
         <Button onAction="#registrarPedido" text="Registrar" />
         <Button text="Limpar" styleClass="botao-limpar"/>
     </HBox>
