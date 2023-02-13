@@ -27,11 +27,28 @@ CREATE TABLE IF NOT EXISTS vendas (
 
 CREATE TABLE IF NOT EXISTS itensPedido (
 	id INT AUTO_INCREMENT,
-    idVenda INT NOT NULL,
 	idProduto INT NOT NULL,
-    valor double NOT NULL,
-    quantidade INT NOT NULL,
+    quantidade double NOT NULL,
+    valor real NOT NULL,
+    idPedido INT UNSIGNED,
     PRIMARY KEY (id),
-	CONSTRAINT itensvenda_FK_venda FOREIGN KEY (idVenda) REFERENCES vendas(id),
-    CONSTRAINT itensvenda_FK_produto FOREIGN KEY (idProduto) REFERENCES produtos(id)
+    CONSTRAINT itensvenda_FK_produto FOREIGN KEY (idProduto) REFERENCES produtos(id),
+    CONSTRAINT itensvenda_FK_pedido FOREIGN KEY (idPedido) REFERENCES pedidos(id)
+);
+
+CREATE TABLE IF NOT EXISTS pedidos (
+  id int UNSIGNED AUTO_INCREMENT,
+  data DATE NOT NULL,
+  valorTotal double NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS pedidosprodutos (
+  idPedido INT UNSIGNED NOT NULL,
+  idProduto INT UNSIGNED NOT NULL,
+  PRIMARY KEY (idPedido, idProduto),
+  CONSTRAINT intenspedido_FK_pedido
+      FOREIGN KEY (idPedido) REFERENCES pedidos(id),
+  CONSTRAINT itensPedido_FK_produto
+      FOREIGN KEY (idProduto) REFERENCES produtos(id)
 );

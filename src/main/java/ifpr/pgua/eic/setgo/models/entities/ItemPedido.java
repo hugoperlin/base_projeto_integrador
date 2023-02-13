@@ -3,8 +3,8 @@ package ifpr.pgua.eic.setgo.models.entities;
 public class ItemPedido {
     private int id;
     private Produto produto;
-    private double valorPedido;
     private double quantidade;
+    private double valorPedido;
     
     public int getId() {
         return id;

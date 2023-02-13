@@ -39,7 +39,7 @@
 
     <ListView fx:id="ltvPedidos" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
 
-    <HBox GridPane.columnIndex="1" GridPane.rowIndex="6">
+    <HBox GridPane.columnIndex="0" GridPane.rowIndex="6">
         <Button onAction="#registrarPedido" text="Registrar" />
         <Button text="Limpar" styleClass="botao-limpar"/>
     </HBox>

@@ -77,6 +77,36 @@ public class JDBCProdutoDAO implements ProdutoDAO {
             return Result.fail(e.getMessage());
         }
     }
+
+    @Override
+    public Produto findById(int id){
+        try {
+            Connection con = fabricaConexoes.getConnection();
+            
+            PreparedStatement prep = con
+                    .prepareStatement("SELECT * FROM produtos WHERE id = ?");
+            
+            prep.setInt(1, id);
+            ResultSet result = prep.executeQuery();
+            
+            String nome = result.getString("nome");
+            String descricao = result.getString("descricao");
+            float preco = result.getFloat("valor");
+            double quant = result.getDouble("quantidade");
+            
+            Produto produto = new Produto(id, nome, descricao, preco, quant);
+            
+            prep.close();
+            con.close();
+
+            return produto;
+            
+        } catch (Exception e) {
+            Result.fail(e.getMessage());
+            return null;
+        }
+
+    }
         
 }
     
