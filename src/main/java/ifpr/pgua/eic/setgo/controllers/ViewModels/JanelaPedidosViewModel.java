@@ -65,6 +65,11 @@ public class JanelaPedidosViewModel {
         return produtos;
     }
 
+    public ObservableList<Pedido> getPedidos(){
+        return obsPedidos;
+    }
+
+
     public void carregaLista(){
         produtos.clear();
         produtos.addAll(produtosRepository.getProdutos());
@@ -116,7 +121,7 @@ public class JanelaPedidosViewModel {
 
         valorTotalProperty.setValue("R$"+valor);
         
-         return Result.success("Adicionado!");
+        return Result.success("Adicionado!");
 
     }
 

@@ -12,7 +12,7 @@
 <HBox xmlns="http://javafx.com/javafx" 
       xmlns:fx="http://javafx.com/fxml" 
       prefHeight="400" prefWidth="400"
-      fx:controller="ifpr.pgua.eic.setgo.controllers.JanelaLista"
+      fx:controller="ifpr.pgua.eic.setgo.controllers.JanelaVendas"
       spacing="5.0"
       stylesheets="@../css/estilo.css"
       >
@@ -23,8 +23,11 @@
             <Button text="Buscar" onAction="#buscar"/>
         </HBox>
 
-        <ListView fx:id="ltvContatos" onMouseClicked="#mostraDetalhes"/>
+        <ListView fx:id="lvtItensPedidos" onMouseClicked="#mostraDetalhes"/>
     </VBox>
     <TextArea fx:id="taDetalhes" prefWidth="200" editable="false"/>
+
+    <Label text="Valor Total:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <TextField fx:id="tfTotal" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
 </HBox>

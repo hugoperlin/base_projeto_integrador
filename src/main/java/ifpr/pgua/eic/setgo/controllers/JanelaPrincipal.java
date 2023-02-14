@@ -25,5 +25,10 @@ public class JanelaPrincipal {
     private void carregaTelaPedidos(){
         App.changeScreenRegion("PEDIDOS", BorderPaneRegion.CENTER);
     }
+
+    @FXML
+    private void carregaTelaVendas(){
+        App.changeScreenRegion("VENDAS", BorderPaneRegion.CENTER);
+    }
     
 }

@@ -52,3 +52,24 @@ CREATE TABLE IF NOT EXISTS pedidosprodutos (
   CONSTRAINT itensPedido_FK_produto
       FOREIGN KEY (idProduto) REFERENCES produtos(id)
 );
+
+DELIMITER $$
+DROP TRIGGER IF EXISTS quant_produtos_insert $$
+CREATE TRIGGER quant_produtos_insert
+BEFORE INSERT
+ON itensPedido FOR EACH ROW
+BEGIN
+  DECLARE qnt DOUBLE;
+
+  SELECT quantidade 
+  INTO qnt
+  FROM produtos
+  WHERE id = (new.idProduto);
+
+  IF (qnt < new.quantidade) THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "Quantidade não disponível";
+  END IF; 
+
+END$$    
+DELIMITER ;
+

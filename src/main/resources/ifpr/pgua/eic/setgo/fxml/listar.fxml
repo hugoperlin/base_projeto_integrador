@@ -14,7 +14,7 @@
       prefHeight="400" prefWidth="400"
       fx:controller="ifpr.pgua.eic.setgo.controllers.JanelaLista"
       spacing="5.0"
-      stylesheets="@../css/estilo_lista.css"
+      stylesheets="@../css/estilo.css"
       >
 
     <VBox spacing="5.0">
