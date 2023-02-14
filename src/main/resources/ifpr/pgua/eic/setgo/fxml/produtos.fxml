@@ -20,7 +20,8 @@
           xmlns="http://javafx.com/javafx/18" 
           xmlns:fx="http://javafx.com/fxml/1" 
           fx:controller="ifpr.pgua.eic.setgo.controllers.JanelaProduto"
-          stylesheets="@../css/estilo.css;@../css/estilo_cadastro.css">
+          stylesheets="@../css/estilo.css;@../css/estilo.css">
+
 
     <Label  text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
     <TextField  fx:id="tfNome"  GridPane.columnIndex="1" GridPane.rowIndex="0" />

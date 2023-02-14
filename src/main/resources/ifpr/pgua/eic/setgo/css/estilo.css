@@ -1,17 +1,38 @@
-.root{
-    -fx-background-color:#AAA;
+.root {
+    -fx-background-color: rgb(213, 211, 211);
 }
 
-.button{
-    -fx-background-color: #FFF;
+.label {
+    -fx-text-fill: rgb(0, 0, 0);
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+}
+
+.text-field {
+    -fx-background-color:rgb(219, 230, 248);
+    -fx-border-radius: 4;
+    -fx-border-color: rgb(0, 0, 0);
+    -fx-font-size: 12;
+}
+
+.button {
+    -fx-text-fill: white;
+    -fx-background-color: #010429;
+    -fx-background-radius: 10;
+    -fx-font-style: bold;
+    -fx-font-size: 14;
 }
 
 .botao-limpar{
-    -fx-background-color: #FF6666;
-    -fx-text-fill: #FFF;
+    -fx-background-color: rgb(173, 30, 30);
+    -fx-text-fill: white;
+    -fx-border-color: rgb(0, 0, 0);
+    -fx-border-radius: 6;
 }
 
 .botao-suc{
-    -fx-background-color: #6676FF;
-    -fx-text-fill: #FFF;
+    -fx-background-color: rgb(61, 158, 31);
+    -fx-text-fill: white;
+    -fx-border-color: rgb(0, 0, 0);
+    -fx-border-radius: 6;
 }
