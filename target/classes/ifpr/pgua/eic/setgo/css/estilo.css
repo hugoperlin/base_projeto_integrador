@@ -31,7 +31,7 @@
 }
 
 .botao-suc{
-    -fx-background-color: rgb(61, 158, 31);
+    -fx-background-color: #010429;
     -fx-text-fill: white;
     -fx-border-color: rgb(0, 0, 0);
     -fx-border-radius: 6;
