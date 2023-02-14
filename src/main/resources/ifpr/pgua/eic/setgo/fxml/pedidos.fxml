@@ -48,13 +48,12 @@
         <Button text="Limpar" styleClass="botao-limpar"/>
     </HBox>
 
-    <TableView fx:id="tbProdutos" prefHeight="500.0" prefWidth="560.0"
+    <TableView fx:id="tbPedidos" prefHeight="500.0" prefWidth="560.0"
          GridPane.columnIndex="0" GridPane.rowIndex="7">
       <columns>
-        <TableColumn fx:id="tbcProduto" prefWidth="191.0" text="Produto" />
-        <TableColumn fx:id="tbcDescricao" prefWidth="191.0" text="Descrição" />
-        <TableColumn fx:id="tbcQuantidade" prefWidth="90.0" text="Quantidade" />
-        <TableColumn fx:id="tbcValor" prefWidth="90.0" text="Valor  " />
+        <TableColumn fx:id="ptbcId" prefWidth="191.0" text="ID" />
+        <TableColumn fx:id="ptbcData" prefWidth="191.0" text="Data" />
+        <TableColumn fx:id="ptbcValor" prefWidth="90.0" text="Valor Total" />
       </columns>
     </TableView>
   

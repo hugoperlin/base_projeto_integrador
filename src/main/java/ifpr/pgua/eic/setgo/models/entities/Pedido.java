@@ -44,12 +44,7 @@ public class Pedido {
     }
 
     public float getValorTotal() {    
-        float total = 0;
-        for(ItensPedido itensPedido : itens){
-            total = (float) (total + (itensPedido.getProduto().getPreco()*itensPedido.getQuantidade()));
-        }
-        this.valorTotal = total;
-        return valorTotal;
+        return this.valorTotal;
     }
 
     public void setValorTotal(float valorTotal) {
