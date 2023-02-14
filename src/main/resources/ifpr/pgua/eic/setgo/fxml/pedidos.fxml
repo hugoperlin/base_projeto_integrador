@@ -16,35 +16,39 @@
 <GridPane alignment="CENTER" 
           hgap="5.0" 
           prefHeight="600" 
-          prefWidth="800" 
+          prefWidth="500" 
           vgap="5.0" 
           xmlns="http://javafx.com/javafx/18" 
           xmlns:fx="http://javafx.com/fxml/1" 
           fx:controller="ifpr.pgua.eic.setgo.controllers.JanelaPedido"
-          stylesheets="@../css/estilo.css;@../css/estilo_cadastro.css">
+          stylesheets="@../css/estilo.css;@../css/estilo.css">
+
+    
+
+    <Label text="CADASTRO DE PEDIDOS" styleClass="" />
 
     <Label  text="Produto:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-    <ComboBox  fx:id="cbProdutos"  GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <ComboBox  fx:id="cbProdutos" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
     <Label  text="Quantidade:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-    <TextField  fx:id="tfQuantidade"  GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <TextField  fx:id="tfQuantidade" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
     <Label text="Valor Total:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
     <TextField fx:id="tfValor" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
     <HBox GridPane.columnIndex="1" GridPane.rowIndex="4">
-        <Button onAction="#registrarItens" text="Registrar" />
+        <Button onAction="#registrarItens" text="Registrar" styleClass="botao-suc" />
         <Button text="Limpar" styleClass="botao-limpar"/>
     </HBox>
 
     <ListView fx:id="ltvPedidos" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
 
     <HBox GridPane.columnIndex="0" GridPane.rowIndex="6">
-        <Button onAction="#registrarPedido" text="Registrar" />
+        <Button onAction="#registrarPedido" text="Registrar" styleClass="botao-suc" />
         <Button text="Limpar" styleClass="botao-limpar"/>
     </HBox>
 
-    <TableView fx:id="tbProdutos" prefHeight="200.0" prefWidth="200.0"
+    <TableView fx:id="tbProdutos" prefHeight="500.0" prefWidth="560.0"
          GridPane.columnIndex="0" GridPane.rowIndex="7">
       <columns>
         <TableColumn fx:id="tbcProduto" prefWidth="191.0" text="Produto" />
@@ -53,5 +57,5 @@
         <TableColumn fx:id="tbcValor" prefWidth="90.0" text="Valor  " />
       </columns>
     </TableView>
-
+  
 </GridPane>
