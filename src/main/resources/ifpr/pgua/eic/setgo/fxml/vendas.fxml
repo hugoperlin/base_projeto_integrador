@@ -23,7 +23,7 @@
             <Button text="Buscar" onAction="#buscar"/>
         </HBox>
 
-        <ListView fx:id="ltvContatos" onMouseClicked="#mostraDetalhes"/>
+        <ListView fx:id="lvtItensPedidos" onMouseClicked="#mostraDetalhes"/>
     </VBox>
     <TextArea fx:id="taDetalhes" prefWidth="200" editable="false"/>
 
