@@ -1,0 +1,10 @@
+.text-field{
+    -fx-background-radius:20;
+    -fx-background-color: rgb(0, 221, 255);
+}
+
+.button{
+    -fx-background-radius:20;
+    -fx-background-color:rgb(191, 76, 76);
+    -fx-text-fill: white;
+}

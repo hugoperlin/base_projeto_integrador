@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx" 
+      xmlns:fx="http://javafx.com/fxml" 
+      prefHeight="800" prefWidth="1200"
+      fx:controller="ifpr.pgua.eic.setgo.controllers.JanelaPrincipal"
+      >
+   <padding>
+      <Insets topRightBottomLeft="20"/>
+   </padding>
+
+   <left>
+      <VBox spacing="5.0" alignment="TOP_CENTER" styleClass="side-panel">
+         <padding>
+            <Insets topRightBottomLeft="20"/>
+         </padding>
+
+         <Button text="Produtos" prefWidth="150" onAction="#carregaTelaProdutos"/>
+         <Button text="Pedidos" prefWidth="150" onAction="#carregaTelaPedidos"/>
+         <Button text="Vendas" prefWidth="150" onAction="#carregaTelaVendas"/>
+      </VBox>
+   </left>
+
+
+</BorderPane>

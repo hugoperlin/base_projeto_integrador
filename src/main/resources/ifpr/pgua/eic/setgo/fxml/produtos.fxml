@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="CENTER" 
+          hgap="5.0" 
+          prefHeight="600" 
+          prefWidth="500" 
+          vgap="5.0" 
+          xmlns="http://javafx.com/javafx/18" 
+          xmlns:fx="http://javafx.com/fxml/1" 
+          fx:controller="ifpr.pgua.eic.setgo.controllers.JanelaProduto"
+          stylesheets="@../css/estilo.css;@../css/estilo.css">
+
+   <HBox spacing="7.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+    <Label  text="Nome:" prefWidth="70.0"/>
+    <TextField  fx:id="tfNome" prefWidth="350.0"/>
+   </HBox>
+
+   <HBox spacing="7.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+    <Label text="Descrição:" prefWidth="70.0"/>
+    <TextField fx:id="tfDescri" prefHeight="40" prefWidth="200.0"/>
+   </HBox>
+
+   <HBox spacing="7.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+    <Label text="Preço:" prefWidth="70.0"/>
+    <TextField fx:id="tfPreco" prefWidth="100.0" />
+   </HBox>
+
+    <HBox spacing="7.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+    <Label text="Quantidade:" prefWidth="70.0"/>
+    <TextField fx:id="tfQuant" prefWidth="50.0" />
+   </HBox>
+
+   <HBox spacing="1.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+      <Button onAction="#cadastrar" fx:id="btCadastrar"
+            text="Cadastrar" styleClass="botao-suc" />
+      <Button text="Limpar" styleClass="botao-limpar"/>
+   </HBox>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <Label text="Produtos" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+   <TableView fx:id="tblProdutos" GridPane.columnIndex="0" 
+         GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.columnSpan="2" />
+ 
+</GridPane>

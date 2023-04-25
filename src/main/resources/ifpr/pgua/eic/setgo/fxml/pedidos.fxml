@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="CENTER" 
+          hgap="5.0" 
+          prefHeight="600" 
+          prefWidth="500" 
+          vgap="5.0" 
+          xmlns="http://javafx.com/javafx/18" 
+          xmlns:fx="http://javafx.com/fxml/1" 
+          fx:controller="ifpr.pgua.eic.setgo.controllers.JanelaPedido"
+          stylesheets="@../css/estilo.css;@../css/estilo.css">
+
+       <Label text = "PEDIDOS"/>
+
+    <HBox spacing="7.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+    <Label  text="Produto:" prefWidth="70.0"/>
+    <ComboBox  fx:id="cbProdutos" prefWidth="200.0" />
+    </HBox>
+
+    <HBox spacing="7.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+    <Label  text="Quantidade:" prefWidth="70.0" />
+    <TextField  fx:id="tfQuantidade" prefWidth="50.0" />
+    </HBox>  
+
+    <HBox spacing="7.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+    <Label text="Valor Total:" prefWidth="70.0" />
+    <TextField fx:id="tfValor" prefWidth="100.0" />
+    </HBox>
+
+    <HBox spacing="1.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+        <Button onAction="#registrarItens" text="Registrar" styleClass="botao-suc" />
+        <Button text="Limpar" styleClass="botao-limpar"/>
+    </HBox>
+
+    <ListView fx:id="ltvPedidos" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+
+    <HBox spacing="1.0" GridPane.columnIndex="0" GridPane.rowIndex="6">
+        <Button onAction="#registrarPedido" text="Registrar" styleClass="botao-suc" />
+        <Button text="Limpar" styleClass="botao-limpar"/>
+    </HBox>
+
+    <TableView fx:id="tbPedidos" prefHeight="500.0" prefWidth="560.0"
+         GridPane.columnIndex="0" GridPane.rowIndex="7">
+      <columns>
+        <TableColumn fx:id="ptbcId" prefWidth="191.0" text="ID" />
+        <TableColumn fx:id="ptbcData" prefWidth="191.0" text="Data" />
+        <TableColumn fx:id="ptbcValor" prefWidth="90.0" text="Valor Total" />
+      </columns>
+    </TableView>
+  
+</GridPane>

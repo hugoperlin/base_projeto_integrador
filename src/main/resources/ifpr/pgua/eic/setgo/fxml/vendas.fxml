@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+
+<HBox xmlns="http://javafx.com/javafx" 
+      xmlns:fx="http://javafx.com/fxml" 
+      prefHeight="400" prefWidth="400"
+      fx:controller="ifpr.pgua.eic.setgo.controllers.JanelaVendas"
+      spacing="5.0"
+      stylesheets="@../css/estilo.css"
+      >
+
+    <VBox spacing="5.0">
+        <HBox spacing="5.0">
+            <TextField fx:id="tfBusca"/>
+            <Button text="Buscar" onAction="#buscar"/>
+        </HBox>
+
+        <ListView fx:id="lvtItensPedidos" onMouseClicked="#mostraDetalhes"/>
+    </VBox>
+    <TextArea fx:id="taDetalhes" prefWidth="200" editable="false"/>
+
+    <Label text="Valor Total:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <TextField fx:id="tfTotal" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+</HBox>
